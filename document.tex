@@ -1,5 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 
+\usepackage{fullpage}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[a4paper]{geometry}
@@ -7,14 +9,19 @@
 \usepackage{pdflscape}
 \usepackage{float}
 
+\usepackage{color}
+
 \usepackage{amsthm}
 \usepackage{amsfonts}
 \usepackage{amsmath} %pakiet potrzebny do \eqref
 \usepackage{amssymb} %pakiet potrzebny do \blacksquare i \mathbb{•}
 
 \usepackage[polish]{babel}
+\usepackage{polski}
 
 \usepackage{graphicx}
+
+\usepackage{listliketab}
 
 \newtheorem{lemat}{Lemat}
 \newtheorem{tw}{Twierdzenie}
@@ -41,15 +48,129 @@ pdftex]{hyperref}
 \begin{center}
 \leavevmode
 
+\vfill
+
 \includegraphics[width=1 in]{by-sa.png}
 \end{center}
 \label{fig:cc}
 %insert a link to the licence and its description below
-\scriptsize{Ten utwór jest dostępny na licencji  \href{http://creativecommons.org/licenses/by-sa/3.0/pl/}{Creative Commons Uznanie autorstwa-Na tych samych warunkach 3.0 Polska.}}
+\scriptsize{Ten utwór jest dostępny na licencji  
+\href{http://creativecommons.org/licenses/by-sa/3.0/pl/}{Creative Commons Uznanie autorstwa-Na tych samych warunkach 3.0 Polska.}}
 
 \pagebreak
 
 \section{Relacje}
 
+\begin{df}
+Niech $X_1, X_2, \dots, X_n$ będą zbiorami. Podzbiór iloczynu kartezjańskiego $R \subset X_1 \times X_2 \times \dots \times X_n$ 
+nazywamy n-argumentową relacją. 
+\end{df}
 
+\begin{df}
+Niech $X, Y$ będą zbiorami. Wtedy relacją dwuargumentową nazywamy $\rho = X \times Y$, a zbiory $X, Y$ odpowiednio dziedziną i przeciwdziedziną.  
+\end{df}
+
+\begin{df}
+Relacją binarną nazywamy taką relację dwuargumentową, w której dziedzina i przeciwdziedzina są równe. $\rho = X \times X$
+\end{df}
+
+\subsection{Własności relacji}
+
+$\forall x,y,z \in X$
+\begin{listliketab}
+\storestyleof{itemize} 
+\begin{tabular}{ll}
+	\textbullet  zwrotna & $x \rho x$ \\
+	\textbullet  przeciw-zwrotna & $\neg x\rho x$ \\
+	\textbullet  symetryczna & $x\rho y \Rightarrow y\rho x$ \\
+	\textbullet  przeciw-symetryczna & $x \rho y \Rightarrow \neg y\rho x $ \\
+	\textbullet  antysymetryczna & $x\rho y \wedge y\rho x \Rightarrow x\rho z$ \\
+	\textbullet  przechodnia & $x\rho y \wedge y\rho z \Rightarrow x\rho z$ \\
+	\textbullet  spójna & $ x\rho y \vee y\rho x $ \\
+\end{tabular}
+\end{listliketab}
+
+\begin{df}
+Relację nazywamy relacją równoważności jeśli jest jednocześnie zwrotna, symetryczna i przechodnia
+\end{df}
+
+\begin{df}
+Niech $\rho\subset X\times X$ będzie relacją binarną, a $\mathcal{R}$ zbiorem własności relacji. Powiemy że $\rho'$ jest domknięciem relacji $\rho$
+ze względu na $\mathcal{R} \quad \Leftrightarrow$
+\begin{enumerate}
+	\item $\rho \subset \rho'$
+	\item $\rho'$ jest domknięta ze względu na własności z $\mathcal{R}$
+	\item $\rho'$ jest najmniejszą relacją spełniającą powyższe warunki
+\end{enumerate}
+\end{df}
+
+\begin{przyklad}
+	$\rho \subset \mathbb{N}\times\mathbb{N} \quad m,n \in \mathbb{N} \quad m\rho n \equiv m +1 = n$ \\
+	\begin{center}
+	\begin{tabular}{ccccccccc}
+		$\rho$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
+			0  & {\color{red}1} & {\color{blue}1} & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & \dots \\
+			1  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & \dots \\
+			2  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  &  {\color{green}1} & {\color{green}1}  & \dots \\
+			3  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  & {\color{green}1}  & \dots \\
+			4  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  & \dots \\
+			5  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & \dots \\
+	     \dots & \dots  & \dots  & \dots  & \dots  & \dots  & \dots  & {\color{red}1}  & \dots \\
+	\end{tabular}\\
+	\end{center}	
+	{\color{yellow} $0$ oznacza brak relacji}, $1$ oznacza że dwa elementy są w relacji {\color{red}zwrotnej}, {\color{green}przechodniej} lub {\color{blue}$\rho$}. 
+	Cała tabel przedstawia natomiast relację $\rho'$ taką że $\forall m,n \in \mathbb{N} \quad m \rho' n \equiv m \leqslant n$,  będącą domknięciem relacji $\rho$ ze względu na 
+	$\mathcal{R} = \{\text{zwrotność, przechodniość}\}$
+\end{przyklad}
+
+\subsection{Słowa i alfabety}
+	\begin{df}
+		Dowolny skończony ciąg nad danym alfabetem nazywamy słowem. $\varepsilon$ -- słowo puste, $\Sigma^*$ -- zbiór wszystkich słów
+	\end{df}
+	
+	\begin{df}
+		Dowolny podzbiór zbioru słów jest językiem $L \subset \Sigma^*$
+	\end{df}
+
+	\begin{przyklad}~\\
+		\begin{itemize}
+			\item $\Sigma = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$
+			\item $\Sigma^* = \{\varepsilon, 0, 1, \dots, 9, 00, 01, \dots, 09, 10, 11, \dots, 99, 100, \dots\}$
+			\item $L = \{0, 1, 2, \dots, 9, 10, \dots, 19, 20, 21, \dots, 99, 100, \dots \}$
+			\item $L' = \{2, 3, 5, 7, 11, \dots \}$
+		\end{itemize}
+	\end{przyklad}
+
+	\begin{df}
+		Jeżeli nad zbiorem $X$ zdefiniowano relację równoważności $\sim$ to klasą abstrakcji elementu $x\in X$ nazwiemy zbiór wszystkich elementów 
+		z $X$ które są w relacji z $x$: $[x]_\sim = \{y\in X: y\sim x\}$
+	\end{df}		
+	
+	\begin{przyklad}
+		$\Sigma = \{0, 1, \dots, 9\}$, $\rho \subset \Sigma^* \times \Sigma^* \quad \forall n,m\in \Sigma^* \quad m\rho n \equiv
+		 \text{wartość } m = \text{wartość } n$. Klasy abstrakcji: \\
+		\begin{itemize}
+			\item $A_\epsilon = \{\epsilon\}$
+			\item $A_0 = \{0, 00, 000, \dots\}$
+			\item $A_1 = \{1, 01, 001, \dots\}$
+			\item $A_2 = \{2, 02, 002, \dots\}$
+		\end{itemize}
+	\end{przyklad}		
+	
+	\begin{przyklad}
+		$\rho \subset \mathbb{N} \times \mathbb{N}:  m\rho n \equiv |m-n| = 3$ -- nie jest zwrotna ani przechodnia ale jest symetryczna.
+		Domknięcie zwrotne: $m\rho n \equiv (m-n) mod 3 = 0 \vee m = \epsilon = n$. Klasy tego domknięcia abstrakcji $[\epsilon]$, $[0]$, $[1]$, $[2]$
+	\end{przyklad}
+	
+	\begin{df}
+		Powiemy że relacja $\rho$ jest prawostronnie niezmienna $\Leftrightarrow$ gdy dla dowolnych dwóch słów będących w relacji, po dopisaniu
+		tego samego słowa nadal pozostaną w niej. 
+		$$ \forall u, v \in \Sigma^* \quad u\rho v \Rightarrow \forall z\in\Sigma^* \quad uz \rho vz $$
+	\end{df}
+	
+	\begin{df}
+		Powiemy żę $R_L$ jest relacją indukowaną przez język 
+		$L \Leftrightarrow$ $$ \forall u,v \in \Sigma^* \quad uR_Lv \equiv \forall z\in \Sigma^* \quad uz\in L \equiv vz\in L$$
+	\end{df}		
+	
 \end{document}
