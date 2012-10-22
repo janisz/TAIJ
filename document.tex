@@ -18,7 +18,10 @@
 
 \usepackage{graphicx}
 
+\usepackage[normalem]{ulem}
+
 \usepackage{listliketab}
+\usepackage{paralist}
 
 \newtheorem{lemat}{Lemat}
 \newtheorem{tw}{Twierdzenie}
@@ -26,6 +29,8 @@
 \newtheorem{zad}{Zadanie}
 \theoremstyle{definition}
 \newtheorem{df}{Definicja}
+\theoremstyle{remark}
+\newtheorem{uwaga}{Uwaga}
 
 \usepackage[pdfauthor={Janisz},%
 pdftitle={Teoria Automatów i Języków},%
@@ -59,16 +64,18 @@ pdftex]{hyperref}
 \section{Relacje}
 
 \begin{df}
-Niech $X_1, X_2, \dots, X_n$ będą zbiorami. Podzbiór iloczynu kartezjańskiego $R \subset X_1 \times X_2 \times \dots \times X_n$ 
-nazywamy n-argumentową relacją. 
+Niech $X_1, X_2, \dots, X_n$ będą zbiorami. Podzbiór \href{http://pl.wikipedia.org/wiki/Iloczyn_kartezja%C5%84ski}{iloczynu kartezjańskiego} 
+$R \subset X_1 \times X_2 \times \dots \times X_n$ 
+nazywamy n-argumentową \href{http://pl.wikipedia.org/wiki/Relacja_(matematyka)}{relacją}. 
 \end{df}
 
 \begin{df}
-Niech $X, Y$ będą zbiorami. Wtedy relacją dwuargumentową nazywamy $\rho = X \times Y$, a zbiory $X, Y$ odpowiednio dziedziną i przeciwdziedziną.  
+Niech $X, Y$ będą zbiorami. Wtedy \href{http://pl.wikipedia.org/wiki/Relacja_dwuargumentowa}{relację dwuargumentową} nazywamy $\rho = X \times Y$, a zbiory $X, Y$ odpowiednio dziedziną i przeciwdziedziną.  
 \end{df}
 
 \begin{df}
-Relacją binarną nazywamy taką relację dwuargumentową, w której dziedzina i przeciwdziedzina są równe. $\rho = X \times X$
+Relacją binarną nazywamy taką relację dwuargumentową,
+w której dziedzina i przeciwdziedzina są równe. $\rho = X \times X$
 \end{df}
 
 \subsection{Własności relacji}
@@ -88,7 +95,8 @@ $\forall x,y,z \in X$
 \end{listliketab}
 
 \begin{df}
-Relację nazywamy relacją równoważności jeśli jest jednocześnie zwrotna, symetryczna i przechodnia
+Relację nazywamy \href{http://pl.wikipedia.org/wiki/Relacja_r%C3%B3wnowa%C5%BCno%C5%9Bci}{relacją równoważności}
+jeśli jest jednocześnie zwrotna, symetryczna i przechodnia
 \end{df}
 
 \begin{df}
@@ -122,7 +130,8 @@ ze względu na $\mathcal{R} \quad \Leftrightarrow$
 
 \subsection{Słowa i alfabety}
 	\begin{df}
-		Dowolny skończony ciąg nad danym alfabetem nazywamy słowem. $\varepsilon$ -- słowo puste, $\Sigma^\star$ -- zbiór wszystkich słów
+		Dowolny skończony ciąg nad danym alfabetem nazywamy \href{http://pl.wikipedia.org/wiki/S%C5%82owo_(matematyka)}{słowem}.
+		 $\varepsilon$ -- słowo puste, $\Sigma^\star$ -- zbiór wszystkich słów
 	\end{df}
 	
 	\begin{df}
@@ -255,11 +264,12 @@ ze względu na $\mathcal{R} \quad \Leftrightarrow$
 \section{Grafy}
 	
 	\begin{df}
-		Grafem nazywamy parę $G = (V, E)$ gdzie $V$ to zbiór wierzchołków $E \subset V \times V$ to zbiór krawędzi.
+		\href{http://pl.wikipedia.org/wiki/Graf_(matematyka)}{Grafem} nazywamy parę $G = (V, E)$ gdzie $V$ to zbiór wierzchołków 
+		$E \subset V \times V$ to zbiór krawędzi.
 	\end{df}	
 
 	\begin{df}
-		Drzewo to graf spójny graf acykliczny o następujących własnościach:
+		\href{http://pl.wikipedia.org/wiki/Drzewo_(matematyka)}{Drzewo} to graf spójny graf acykliczny o następujących własnościach:
 		\begin{enumerate}
 			\item Jednowierzchołkowy graf $G = (\{v\}, \emptyset)$ nazywamy korzeniem drzewa
 			\item Jeśli $T_1 = (v_1, E_1), ~ T_2 = (v_2, E_2), ~\dots ,~ T_k = (v_k, E_k)$ są drzewami o korzeniach $v_{01}, v_{02}, \dots, v_{0k}$
@@ -303,5 +313,159 @@ ze względu na $\mathcal{R} \quad \Leftrightarrow$
 			\end{enumerate}
 		\end{proof}
 	\end{lemat}
+	
+\section{Wyrażenia regularne}
+	
+	\begin{df}(\href{http://pl.wikipedia.org/wiki/Domkni%C4%99cie_Kleene'ego}{Domknięcie Kleene'ego})
+	Jeżeli $L$ jest językiem nad pewnym alfabetem to:
+		\begin{itemize}
+			\item $L^0 = \{\epsilon\}$
+			\item $L^{n+1} = L^n \circ L$
+			\item $L^* = \bigcup\limits_{k=0}^\infty L^k$
+		\end{itemize}
+	\end{df}	
+	
+	\begin{przyklad}
+		Niech $L = \{00, 000\}$ będzie alfabetem, wtedy:\\
+		\begin{inparaenum}[\itshape a\upshape)] 
+			\item $L^0 = \{\epsilon\}$
+			\item $L^1 = \{00, 000\}$
+			\item $L^2 = \{0000, 00000, 000000\}$
+			\item $L^* = \{\epsilon, 00, 000, 0000, 00000, \dots\}$
+		\end{inparaenum}
+	\end{przyklad}
+	
+	\begin{df} \href{http://pl.wikipedia.org/wiki/Wyra%C5%BCenia_regularne}{Wyrażeniem regularnym} nad alfabetem $\Sigma$ nazywamy konstrukcje
+	 powstałe w wyniku skończonej iteracji poniższych zasad.
+		\begin{enumerate}
+			\item Podstawowe wyrażenia regularne: \footnote{Poniższe znaki powinny zostać wyróżnione, aby zaznaczyć używanie ich w kontekście
+			wyrażeń regularnych. Jednak ponieważ zazwyczaj ich znaczenie wynika wprost z kontekstu, nie zastosowano tu żadnego wyróżnienia}
+				\begin{itemize}
+					\item $\emptyset$ -- brak znaku
+					\item $\epsilon$ -- słowo puste
+					\item $\Sigma$ -- alfabet $\forall a\in\Sigma ~~ a$
+				\end{itemize}
+			\item Jeśli $r$ i $s$ są wyrażeniami regularnymi to następujące wyrażenia też są wyrażeniami regularnymi
+				\footnote{W dalszej części przyjmujemy natępujące priorytety operacji (od najniższego) suma, konkatenacja, domknięcie Kleene'ego. 
+				$((a+b)(a+(b^*))) \equiv (a+b)(c+b^*)$}
+				\begin{itemize}
+					\item $(r+s)$ -- suma
+					\item $(rs)$ -- konkatenacja
+					\item $(r^*)$ -- domknięcie Kleene'ego
+				\end{itemize}
+		\end{enumerate}		
+	\end{df}	
+	
+	\begin{uwaga}
+	Wyrażenia regularne generują języki.
+	\end{uwaga}
+	
+	\begin{tw}
+		Jeżeli $r$ i $s$ genrują języki $R$ oraz $S$ to:
+		\begin{itemize}
+			\item $r+s$ generuje $R\cup S$
+			\item $rs$ generuje $RS = \{uv: ~ u\in R, ~ v\in S\}$
+			\item $r^*$ generuje $R^*$
+		\end{itemize}
+	\end{tw}
+	
+	\begin{df}
+		Językami regularnymi nazywamy takie i tylko takie języki, które zostały wygenerowane przez wyrażenie regularne
+	\end{df}	
+	
+	\begin{przyklad}
+		Sprawdzić czy Język liczb dziesiętnych bez nieznaczących zer jest językiem regularnym. \\
+		\emph{Odp.} Tak, generuje go następujące wyrażenie regularne:
+		$$  0 + (1+2+\dots+9)(0+1+2+\dots+9)^* $$
+		\begin{proof}
+			Należy wykazać że każde słowo generowane przez to wyrażenie jest liczbą dziesiętną, bez nieznaczących zer oraz każda liczba 
+			dziesiętna bez nieznaczących zer jest generowana przez to wyrażenie.\\
+			Generujemy $0$ lub liczbę rozpoczynającą się do cyfry $> 0$, po której następuje dowolna ilość dowolnych cyfr.
+		\end{proof}
+	\end{przyklad}		
+	
+	\begin{przyklad}
+		Wykazać że język słów binarnych w których sekwencja trzech kolejnych jedynek występuje co najmniej raz,
+		jest językiem regularnym. \\
+		\emph{Odp.} Tak, generuje go następujące wyrażenie regularne:
+		$$[00^*](\epsilon+1+11)00]111[00^*(\epsilon+1+11)]^* $$
+	\end{przyklad}
+	
+	\begin{zad}
+		Sprawdzić czy język słów binarnych, które zaczynają i kończą się tą samą literą jest językiem regularnym.
+	\end{zad}
+	\begin{zad}
+		Sprawdzić czy język słów binarnych, którego kolejne sekwencje tych samych liter są nie krótsze niż poprzednie jest językiem regularnym.
+	\end{zad}
+	
+	\subsection{Tożsamości wyrażeń regularnych}
+	\begin{eqnarray}
+		\emptyset + r &=& r + \emptyset \\
+		r + s &=& s + r \\
+		(r+s) + t &=& r + (s+t) \\
+		\epsilon + r &=& r \\
+		(rs)t &=& r(st) \\
+		r(s+t) &=& rs + rt \\
+		(r^*)^* &=& r^* \\
+		(r^*s^*)^* &=& (r+s)^* \\
+		(\epsilon + r)^* &=& r^* \\
+		(r^* + s^*)^* &=& (r + s)^*\\		
+	\end{eqnarray}
+	
+	\begin{zad}
+		Udowodnić powyższe tożsamości
+	\end{zad}
+	
+	\begin{lemat}{\href{http://pl.wikipedia.org/wiki/Twierdzenie_Myhilla-Nerode%27a}{Myhill-Nerode}}
+		Język $L$ jest regularny $\Leftrightarrow$ liczba kals abstrakcji relacji $R_L$ indukowanej przez ten język jest skończona.
+	\end{lemat}	
+	
+	\begin{lemat}{\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j%C4%99zyk%C3%B3w_regularnych}{O pompowaniu}}
+		Jeśli język $L$ jest regularny to istnieje stała $n_L$ taka że dla każdego słowa $z\in L$ spełniona jest implikacja
+		\footnote{jeśli słowo jest dłuższe niż $n_L$ to istnieje taki podział słowa $z$ na 3 części taki, że suma długości pierwszej
+		i drugiej jest mniejsza niż $n_i$ i trzecia nie jest pusta. Wtedy słowo $z$ złożone z częśi pierwszej połączonej z powieloną 
+		częścią drugą i zakończone częścią trzecią należy do $L$}
+		$$|z| \geqslant n_L \Rightarrow (\exists u,v,w ~~ z = uvw ~~ |uv| \leqslant n_L, ~~ |v| \geqslant 1)
+		(\forall i\in\mathbb{N}) z_i = uv^iw \in L$$
+	\end{lemat}
+	
+	\begin{lemat}{Kontrapozycja lematu o pompowaniu}
+		Jeśli dla dowolnej stałej $n$ istnieje słowo $z\in L$ takie że 
+		$|z|\geqslant n$ i $(\forall u,v,z: ~~ z = uvw ~~ |uv| < n, ~ |v| \geqslant 1)(\exists i\in\mathbb{N}) ~~ z = uv^iw \not\in L$
+		to język $L$ nie jest regularny.
+	\end{lemat}
+
+
+	\begin{przyklad}
+		Sprawdzić żę język palindromów nad alfabetem binarnym nie jest językiem regularnym.
+		\begin{proof}
+			\begin{itemize}
+				\item[sposób 1] Wystarczy wskazać nieskończony ciąg klas abstrakcji aby udowodnić że język nie jest regularny.
+				Pokażę że nieskończony ciąg słów z których każde jest w innej klasie abstrakcji: 
+				$z_0 = \epsilon, ~ z_1 = 0, ~ z_2 = 00, ~\dots$.\\
+				Dowolne 2 słowa tego ciągu należą do różnych klas abstrakcji.
+				$z_i = 0^i \quad z_j = 0^j ~~ z \neq j, ~~ z_i  \xout{R_L}z_j$ bo dla $w = 10^i ~~
+				\begin{matrix}
+					z_iw \in L \\ z_jw \not\in L
+				\end{matrix}$
+				\item[sposób 2] Niech $N$ -- stała, z kontrapozycji lematu o pompowaniu. Niech $z = 0^N10^N$, dowolny podział
+				spełniający założenia tego lematu to taki którego środkowa część podziału będzie się składać
+				z zer i początkowej części słowa.
+				$$z = \underbrace{0^p}_u\underbrace{0^q}_v\underbrace{0^r10^N}_w\text{ , gdy }
+				\left\lbrace \begin{matrix}
+					p+q+r &=& N \\ p + q &\leqslant& N \\ 1 &\leqslant& q
+				\end{matrix} \right.$$
+				 Niech $i=0$ wówczas $z_0 = 0^p0^r10^N ~~ p+r < N \Rightarrow z_0 \not\in L$
+			\end{itemize}
+		\end{proof}
+	\end{przyklad}	
+	
+	\begin{zad}
+		Sprawdzić czy język słów binarnych $L = \{ w\in \{0,1\}^*: ~ \#_0w < \#_1w\}$\footnote{$\#$ oznacza liczbę wystąpień znaku z 
+		indeksu dolnego w słowie}, jest regularny.
+	\end{zad}
+	\begin{zad}
+		Sprawdzić czy język słów binarnych które składają się z sekwencji tych samych liter nie krótszych niż trzy, jest regularny.
+	\end{zad}
 	
 \end{document}
