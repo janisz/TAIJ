@@ -1,0 +1,125 @@
+	\section{Gramatyki}
+	
+	\begin{df}
+	\href{http://pl.wikipedia.org/wiki/Gramatyka_formalna}{Gramatyka} to sposób opisu języka, czyli podzbioru zbioru wszystkich
+	 słów nad danym alfabetem.
+	\end{df}
+	\begin{df}[Relacja wywodu bezpośredniego]
+	$C(V \cup T)* \times (V \cup T)*$
+	\end{df}
+	
+	\begin{tw}
+	Dwa słowa są w relacji wywodu bezpośredniego gdy jedno powstało z drugiego w wyniku pewnej produkcji
+	\end{tw}
+	
+	\begin{df}
+	Relacja wywodu jest przechodnim domknięciem relacji wywodu bezpośredniego.
+	\end{df}
+	
+	\begin{df}
+	Językiem generowanym przez gramatykę $G$ nazywamy zbiór słów nad alfabetem terminali, które pozostają w relacji wywodu z 
+	symbolem początkowym.
+	$$ L(G) = \{ w\in T^\star: S \Rightarrow w \} $$
+	\end{df}
+	
+	\begin{df}
+	\href{http://pl.wikipedia.org/wiki/Gramatyka_regularna}{Gramatyki regularne} są to gramatyki prawostronnie liniowe lub 
+	lewostronnie liniowe
+	\end{df}
+	
+	\begin{df}
+	Gramatykę nazywamy prawostronnie liniową $\Leftrightarrow$ wszystkie jej produkcje są postaci $\begin{matrix}
+	A&\rightarrow&wB \\
+	A&\rightarrow&w
+	\end{matrix}$
+	gdzie $A, B \in V, ~ w\in T^\star$\footnote{początkowe wielkie litery alfabetu oznaczają symbole nieterminalne, 
+	natomiast początkowe małe litery alfabetu to symbole terminalne. Greckie litery oznaczają ciągi symboli terminalnych i nieterminalnych
+	Końcowe litery alfabetu oznaczają ciągi terminali}	 
+	\end{df}
+	
+	\begin{przyklad}
+		Konstrukcja gramatyki generującej język liczb binarnych, bez nieznaczących zer \\
+		$G = (V, P, T, S) \quad V = \{S\} \cup \{A\} \quad T = \{0, 1\}$\footnote{Jeśli nie określono inaczej to 
+		za symbol początkowy przyjmujemy $S$}
+		$$
+		\begin{matrix}
+		S \to 0 & S \to 1 & S \to 1A \\
+		A \to 0A & A \to 1A & A \to 1 & A \to 0\\		
+		\end{matrix}
+		\Rightarrow
+		S \to 0|1|1|A, \quad A \to 0|1|0A|1A
+		$$
+	\end{przyklad}		
+	
+	\begin{tw}
+		Gramatyki regularne generują tylko języki regularne
+		
+\subsection{\href{http://pl.wikipedia.org/wiki/Gramatyka_bezkontekstowa}{Gramatyki bezkontekstowe}}
+	\end{tw}		
+		\begin{tw}
+		Gramatyki bezkontekstowe generują tylko języki bezkontekstowe
+	\end{tw}		
+	
+	\begin{przyklad}
+		Wykazać że język palindromów jest generowany przez gramatykę bezkontekstową.
+	\begin{proof}
+		$w$ - plaindrom nad $\{0,1\}$ \\
+		\begin{enumerate}
+			\item Jeśli $w$ jest słowem pustym ($\epsilon$) lub jedną literą to jest generowane
+			\item Wykażemy że jesłi palindrom długości nie większych niż $n$ są generowane w tej gramatyce to
+			generowane są również palindromy od długości $n+1$ i $n+2$\\
+		\end{enumerate}\footnote{ten dowód można przeprowadzić rozpatrując parzystość $n$}
+	\end{proof}
+	\end{przyklad}		
+	
+	\begin{tw}
+	Klasa języków regularnych zawiera się w klasie języków bezkontekstowych
+	\end{tw}
+	
+	\subsubsection{Metody upraszczania gramatyk}
+	
+	\begin{lemat}[Usuwanie symboli bezużytecznych 1]
+		Dla dowolnej gramatyki bezkontekstowej $G = (V, T, P, S)$ genrującej niepusty język $L(G)$ istnieje równoważna gramatyka
+		bezkontekstowa $G' = (V', T', P', S')$ tak że z każdego symbolu nieterminalnego z $V'$ można wyprowadzić ciąg symboli terminalnych (być może pusty)
+	\end{lemat}	
+	
+	\begin{lemat}[Usuwanie symboli bezużytecznych 2]
+		Dla dowolnej gramatyki bezkontekstowej $G = (V, T, P, S)$ genrującej niepusty język $L(G)$ istnieje równoważna gramatyka
+		bezkontekstowa $G' = (V', T', P', S')$ tak że każdy symbol terminalny i nieterminalny z $T' \cup V'$ można wyprowadzić
+		z  symbolu startowego $S$
+	\end{lemat}		
+	
+	\begin{tw}
+		Po zastosowani lematów w podanej kolejności uzyskamy gramatykę bez symboli bezużytecznych
+	\end{tw}
+	
+	\begin{df}
+		Symbol nieterminalny nazywamy wycieralnym $\Leftrightarrow$ można z niego wywieść ciąg pusty
+	\end{df}		
+
+	\begin{df}
+		Produkcję nazywamy wycieralną jeśli prawą strona tej produkcji można przekształcić do symbolu pustego
+	\end{df}			
+	
+	\begin{df}Metoda wyznaczania symboli wycieralnych\\
+		\begin{enumerate}
+			\item Przeglądamy produkcję i za symbole wycieralne uznajemy te symbole które po lewej stronie produkcji 
+			prowadzą w słowo puste
+			\item Dopóki zbiór symboli wycieralnych się zmienia
+			\begin{enumerate}
+				\item przeglądamy wszystkie produkcje i za symbole wycieralne uznajemy te które po są po lewej stronie
+				produkcji a po prawej ciągi symboli już uznanych za wycieralne
+			\end{enumerate}
+		\end{enumerate}
+	\end{df}
+	
+	\begin{df}
+		Jeśli $G = (V, T, P, S)$ jest gramatyką bezkontekstową i bez symboli bezużytecznych i nie generuje słowa pustego
+		to można znaleźć równoważną jej gramatykę bez symboli bezużytecznych i wycieralnych.\\
+		\emph{Metoda przekształcania}\\
+		Załóżmy że $A \to X_1,X_2,\dots,X_n$ jeśli któryś z symboli $X_i$ jest wycieralny to tę produkcję zastępujemy produkcjami
+		$\begin{matrix}
+			A \to& X_1,X_2,\dots,X_{i-1},X_i,X_{i+1},X_n \\ A \to& X_1,X_2,\dots,X_{i-1},X_{i+1},X_n
+		\end{matrix}$
+		z gramatyki zawsze usuwamy produkcje w słowo puste
+	\end{df}	

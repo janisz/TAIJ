@@ -1,0 +1,53 @@
+\section{Grafy}
+	
+	\begin{df}
+		\href{http://pl.wikipedia.org/wiki/Graf_(matematyka)}{Grafem} nazywamy parę $G = (V, E)$ gdzie $V$ to zbiór wierzchołków 
+		$E \subset V \times V$ to zbiór krawędzi.
+	\end{df}	
+
+	\begin{df}
+		\href{http://pl.wikipedia.org/wiki/Drzewo_(matematyka)}{Drzewo} to graf spójny graf acykliczny o następujących własnościach:
+		\begin{enumerate}
+			\item Jednowierzchołkowy graf $G = (\{v\}, \emptyset)$ nazywamy korzeniem drzewa
+			\item Jeśli $T_1 = (v_1, E_1), ~ T_2 = (v_2, E_2), ~\dots ,~ T_k = (v_k, E_k)$ są drzewami o korzeniach $v_{01}, v_{02}, \dots, v_{0k}$
+			to $$T = \underbrace{ \left(\{v_0\} \cup \bigcup^k_{i=1}V_i \right. }_\text{wierzchołki} ~,~
+					\underbrace{ \left. \bigcup_{i=0}^k \{v_0, v_{0i}\} \cup \bigcup_{i=0}^k E_i \right) }_\text{krawędzie}$$
+			\item Dowolną konstrukcję otrzymaną przez zastosowanie reguł 1 i 2
+		\end{enumerate}			
+	\end{df}
+	
+	\begin{df}
+		Jeśli wysokościami drzew $T_1 = (V_1, E_1), ~ T_2 = (V_2, E_2), ~\dots ,~ T_k = (V_k, E_k)$ są $h_1, h_2, \dots , h_k$ to
+		wysokość drzewa $T$ wynosi $h = max\{h_1, h_2, \dots , h_k\}$
+	\end{df}
+	
+	\begin{df}
+		K-drzewo to drzewo którego dowolny wierzchołek ma k następników.
+	\end{df}
+	
+	\begin{df}[Zasada indukcji matematycznej]
+		Niech $W$ będzie pewną własnością liczb naturalnych taką że:
+		\begin{enumerate}
+			\item $W(0)$ -- własność $W$ zachodzi dla $0$
+			\item $(\forall k=0, 1, \dots) \quad W(k) \Rightarrow W(k+1)$ 
+		\end{enumerate}
+		Wówczas $\forall n \in \mathbb{N} \quad W(n)$ --własność $W$ zachodzi dla n
+	\end{df}
+	
+	\begin{lemat}
+		Dowolne k-drzewo o wysokości $h$ ma nie więcej niż $k^h$ liści
+		\begin{proof} (\emph{indukcyjny})\\
+			\begin{enumerate}
+				\item dla drzewa jednowierzchołkowego liczba liści wynosi $1$, a wysokość $0$
+				\item niech $T_1, T_2, \dots, T_l$ -- k-drzewa o wysokościach $h_1, h_2, \dots, h_l$
+				Niech $T$ -- drzewo zbudowane z $T_1, T_2, \dots, T_l$ według reguły z definicji drzewa. 
+				Wysokość $T$ jest równa $1 + max\{h_1, h_2, \dots, h_l\}$.\\
+				Zakładam, że liczby liści w drzewach $T_1, \dots, T_l$ są nie większe niż $k^{h_1}, k^{h_2}, \dots, k^{h_l}$. 
+				Liczba liści w drzewie $T$ jest nie większa niż 
+				$$k^{h_1} + k^{h_2} + \dots + k^{h_l} \leqslant k\cdot max\{k^{h_1}, k^{h_2}, \dots, k^{h_l}\} = k\cdot k^{max\{h_1, h_2, \dots, h_l\}} 
+				= k^{1 + max\{h_1, h_2, \dots, h_l\}} = k^h$$
+				\item Na mocy spełnienia punktu 1 i 2 zasady indukcji matematycznej wnioskujemy iż lemat jest prawdziwy.
+			\end{enumerate}
+		\end{proof}
+	\end{lemat}
+	

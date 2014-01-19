@@ -1,0 +1,199 @@
+\section{Relacje}
+
+\begin{df}
+Niech $X_1, X_2, \dots, X_n$ będą zbiorami. Podzbiór \href{http://pl.wikipedia.org/wiki/Iloczyn_kartezja%C5%84ski}{iloczynu kartezjańskiego} 
+$R \subset X_1 \times X_2 \times \dots \times X_n$ 
+nazywamy n-argumentową \href{http://pl.wikipedia.org/wiki/Relacja_(matematyka)}{relacją}. 
+\end{df}
+
+\begin{df}
+Niech $X, Y$ będą zbiorami. Wtedy \href{http://pl.wikipedia.org/wiki/Relacja_dwuargumentowa}{relację dwuargumentową} nazywamy $\rho = X \times Y$, a zbiory $X, Y$ odpowiednio dziedziną i przeciwdziedziną.  
+\end{df}
+
+\begin{df}
+Relacją binarną nazywamy taką relację dwuargumentową,
+w której dziedzina i przeciwdziedzina są równe. $\rho = X \times X$
+\end{df}
+
+\subsection{Własności relacji}
+
+$\forall x,y,z \in X$
+\begin{listliketab}
+\storestyleof{itemize} 
+\begin{tabular}{ll}
+	\textbullet  zwrotna & $x \rho x$ \\
+	\textbullet  przeciw-zwrotna & $\neg x\rho x$ \\
+	\textbullet  symetryczna & $x\rho y \Rightarrow y\rho x$ \\
+	\textbullet  przeciw-symetryczna & $x \rho y \Rightarrow \neg y\rho x $ \\
+	\textbullet  antysymetryczna & $x\rho y \wedge y\rho x \Rightarrow x= z$ \\
+	\textbullet  przechodnia & $x\rho y \wedge y\rho z \Rightarrow x\rho z$ \\
+	\textbullet  spójna & $ x\rho y \vee y\rho x $ \\
+\end{tabular}
+\end{listliketab}
+
+\begin{df}
+Relację nazywamy \href{http://pl.wikipedia.org/wiki/Relacja_r%C3%B3wnowa%C5%BCno%C5%9Bci}{relacją równoważności}
+jeśli jest jednocześnie zwrotna, symetryczna i przechodnia
+\end{df}
+
+\begin{df}
+Niech $\rho\subset X\times X$ będzie relacją binarną, a $\mathcal{R}$ zbiorem własności relacji. Powiemy że $\rho'$ jest domknięciem relacji $\rho$
+ze względu na $\mathcal{R} \quad \Leftrightarrow$
+\begin{enumerate}
+	\item $\rho \subset \rho'$
+	\item $\rho'$ jest domknięta ze względu na własności z $\mathcal{R}$
+	\item $\rho'$ jest najmniejszą relacją spełniającą powyższe warunki
+\end{enumerate}
+\end{df}
+
+\begin{przyklad}
+	$\rho \subset \mathbb{N}\times\mathbb{N} \quad m,n \in \mathbb{N} \quad m\rho n \equiv m +1 = n$ \\
+	\begin{center}
+	\begin{tabular}{ccccccccc}
+		$\rho$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
+			0  & {\color{red}1} & {\color{blue}1} & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & \dots \\
+			1  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & {\color{green}1}  & \dots \\
+			2  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  &  {\color{green}1} & {\color{green}1}  & \dots \\
+			3  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  & {\color{green}1}  & \dots \\
+			4  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & {\color{green}1}  & \dots \\
+			5  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{yellow}0}  & {\color{red}1}  & {\color{blue}1} & \dots \\
+	     \dots & \dots  & \dots  & \dots  & \dots  & \dots  & \dots  & {\color{red}1}  & \dots \\
+	\end{tabular}\\
+	\end{center}	
+	{\color{yellow} $0$ oznacza brak relacji}, $1$ oznacza że dwa elementy są w relacji {\color{red}zwrotnej}, {\color{green}przechodniej} lub {\color{blue}$\rho$}. 
+	Cała tabel przedstawia natomiast relację $\rho'$ taką że $\forall m,n \in \mathbb{N} \quad m \rho' n \equiv m \leqslant n$,  będącą domknięciem relacji $\rho$ ze względu na 
+	$\mathcal{R} = \{\text{zwrotność, przechodniość}\}$
+\end{przyklad}
+
+\subsection{Słowa i alfabety}
+	\begin{df}
+		Dowolny skończony ciąg nad danym alfabetem nazywamy \href{http://pl.wikipedia.org/wiki/S%C5%82owo_(matematyka)}{słowem}.
+		 $\varepsilon$ -- słowo puste, $\Sigma^\star$ -- zbiór wszystkich słów
+	\end{df}
+	
+	\begin{df}
+		Dowolny podzbiór zbioru słów jest językiem $L \subset \Sigma^\star$
+	\end{df}
+
+	\begin{przyklad}~\\
+		\begin{itemize}
+			\item $\Sigma = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$
+			\item $\Sigma^\star = \{\varepsilon, 0, 1, \dots, 9, 00, 01, \dots, 09, 10, 11, \dots, 99, 100, \dots\}$
+			\item $L = \{0, 1, 2, \dots, 9, 10, \dots, 19, 20, 21, \dots, 99, 100, \dots \}$
+			\item $L' = \{2, 3, 5, 7, 11, \dots \}$
+		\end{itemize}
+	\end{przyklad}
+
+	\begin{df}
+		Jeżeli nad zbiorem $X$ zdefiniowano relację równoważności $\sim$ to klasą abstrakcji elementu $x\in X$ nazwiemy zbiór wszystkich elementów 
+		z $X$ które są w relacji z $x$: $[x]_\sim = \{y\in X: y\sim x\}$
+	\end{df}		
+	
+	\begin{przyklad}
+		$\Sigma = \{0, 1, \dots, 9\}$, $\rho \subset \Sigma^\star \times \Sigma^\star \quad \forall n,m\in \Sigma^\star \quad m\rho n \equiv
+		 \text{wartość } m = \text{wartość } n$. Klasy abstrakcji: \\
+		\begin{itemize}
+			\item $A_\epsilon = \{\epsilon\}$
+			\item $A_0 = \{0, 00, 000, \dots\}$
+			\item $A_1 = \{1, 01, 001, \dots\}$
+			\item $A_2 = \{2, 02, 002, \dots\}$
+		\end{itemize}
+	\end{przyklad}		
+	
+	\begin{przyklad}
+		$\rho \subset \mathbb{N} \times \mathbb{N}:  m\rho n \equiv |m-n| = 3$ -- nie jest zwrotna ani przechodnia ale jest symetryczna.
+		Domknięcie zwrotne: $m\rho n \equiv (m-n) mod 3 = 0 \vee m = \epsilon = n$. Klasy tego domknięcia abstrakcji $[\epsilon]$, $[0]$, $[1]$, $[2]$
+	\end{przyklad}
+	
+	\begin{df}
+		Powiemy że relacja $\rho$ jest prawostronnie niezmienna $\Leftrightarrow$ gdy dla dowolnych dwóch słów będących w relacji, po dopisaniu do obu tego samego słowa ze zbiru słów nadal pozostaną w relacji. 
+		$$ (\forall u, v \in \Sigma^\star) \quad[u \rho v \Rightarrow (\forall z\in\Sigma^\star) uz \rho vz] $$
+	\end{df}
+	
+\subsection{Relacje indukowane przez język}	
+	
+	\begin{df}
+		Powiemy że $R_L$ jest relacją indukowaną przez język 
+		$L \Leftrightarrow$ $$ (\forall u,v \in \Sigma^\star) \quad \{uR_Lv \equiv [(\forall z\in \Sigma^\star) \quad uz\in L \equiv vz\in L]\}$$
+	\end{df}	
+	
+	\begin{zad} 
+		Udowodnij, że relacja indukowana przez język $(R_L)$ jest relacją równoważności.
+	\end{zad}
+	
+%Wykład 2 
+%12.10.2012
+
+	\begin{przyklad}
+		Niech $L \subset \Sigma^\star$ -- język, $R_L \subset \Sigma^\star \times \Sigma^\star$\footnote{relacja jest nad zbiorem wszystkich słów z alfabetu,
+		a nie nad językiem dlatego przy wyznaczaniu klas abstrakcji należy zbadać również elementy nie należące do języka}
+		$R_L$ jest relacją określoną przez język $L$ w następując sposób $$L \equiv (\forall u,v \in \Sigma^\star) \quad uR_Lv \equiv [(\forall z\in \Sigma^\star) ~
+		uz \in L \equiv vz \in L ]  $$
+		Niech alfabet będzie alfabetem binarnym $(\Sigma = (0, 1)$, a język $L$ językiem binarnym bez znaczących zer -- $L = \{0, 1, 10, 11, 100, \dots \}$
+		\footnote{słowo puste nie należy do języka}. Wtedy relacja $R_L$ tworzy następujące klasy abstrakcji:
+		\begin{enumerate}
+			\item $A_\epsilon = \{\epsilon\}$ -- klasa zawierająca tylko słowo puste $(\epsilon)$ 
+			\item $A_0 = \{0\}$ -- klasa zawierająca tylko $0$
+				\begin{itemize}
+					\item $0$ jest w relacji z samym sobą
+					\item nie jest w relacji z żadnym innym słowem z poza języka ponieważ:
+					\begin{proof}
+						Niech $z = \epsilon$ wówczas $0z = 0\epsilon = 0 \in L$ oraz $uz = u\epsilon = u \not\in L$. Zatem nie może być w relacji z żadnym 
+						słowem z poza języka
+					\end{proof}
+					\item nie jest w relacji z żadnym słowem z języka bo:
+					\begin{proof}
+						Niech $z = 1$ wówczas $0z = 01 \not\in L$ oraz $uz = u1 = 1\dots 1 \in L$
+					\end{proof}
+				\end{itemize}
+			\item $A_{10} = L - \{0\}$ -- klasa zawierająca wszystkie słowa z języka poza $0$
+				\begin{itemize}
+					\item Każdy element jest w relacji z elementem z klasy
+					\begin{proof}
+						Niech $u, v \in A_{10}$ wówczas $u = 1\dots$ i $v = 1\dots$. Dla $z \in \Sigma^\star \quad uz = 1\dots$ i $vz = 1\dots$
+						stąd $uz \in L$ i $vz \in L$
+					\end{proof}
+					\item Każdy element nie jest w relacji z elementem nie należącym do $A_{10}$
+					\begin{proof}
+						Niech $u \in A_{10}$ i $v \not\in A_{10}$ wówczas $u = 1\dots$ 
+						\begin{itemize}
+							\item jeśli $v\ \neq \epsilon$ to znaczy $v = 0\dots $, wówczas dla $z = 1 \quad uz \in L \wedge vz \not\in L$
+							\item jeśli $v = \epsilon$ to dla $z = \epsilon \quad uz \in L \wedge vz \not\in L$
+							\footnote{Można skorzystać z tego że już udowodniliśmy że $\epsilon$ jest w innej klasie abstrakcji}
+						\end{itemize}
+					\end{proof}
+				\end{itemize}
+			\item $A_{01} = \Sigma^\star - (L \cup {\epsilon}) = \{ \text{słowa z wiodącymi nieznaczącymi zerami} \}$
+		\end{enumerate}
+		W przypadku alfabetu złożonego z większej liczby znaków dla tej relacji $R_L$, klasy abstrakcji byłyby identyczne.
+	\end{przyklad}	
+	
+	\begin{przyklad}
+		$L = $ zbiór słów takich że kolejne trójki liczb składają się z identycznych liter $ = \{\epsilon, 000, 111, 000111, 000000, \dots\}\\
+		L \subset \{0, 1\}^\star$\\
+		Klasy abstrakcji relacji indukowanej przez język $L$
+		\begin{enumerate}
+			\item $A_L = \{L\}$ -- wszystkie słowa z języka
+			\item $A_0 = \{u0: ~ u\in L\}$ -- słowa z języka z dodatkowym $0$ na końcu
+			\item $A_1 = \{u1: ~ u\in L\}$ -- słowa z języka z dodatkowym $1$ na końcu
+			\item $A_{00} = \{u00: ~ u\in L\}$ -- słowa z języka z dodatkowym $00$ na końcu
+			\item $A_{11} = \{u11: ~ u\in L\}$ -- słowa z języka z dodatkowym $11$ na końcu
+			\item $A_\sim$ -- wszystkie pozostałe słowa
+		\end{enumerate}
+	\end{przyklad}		
+	
+	\begin{przyklad}
+		$L = $ zbiór słów które mają tyle samo zer i jedynek $ = \{\epsilon, 01, 10, 0011, 1010, \dots\}\\
+		L \subset \{0, 1\}^\star$\\
+		Klasy abstrakcji relacji indukowanej przez język $L$\footnote{indeks dolny przy klasie abstrakcji to różnica pomiędzy liczą zer i jedynek}
+		\begin{enumerate}
+			\item $A_0 = L$
+			\item $A_1 = \{0, \dots \}$
+			\item $A_-1 = \{1, \dots \}$
+			\item $A_2 = \{11, \dots \}$\\
+			\vdots
+		\end{enumerate}
+	\end{przyklad}
+	\begin{zad}
+		Podaj klasy abstrakcji dla relacji indukowanej przez język palindromów nad alfabetem binarnym
+	\end{zad}
