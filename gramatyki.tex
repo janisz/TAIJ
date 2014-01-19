@@ -1,4 +1,4 @@
-	\section{Gramatyki}
+\section{Gramatyki}
 	
 	\begin{df}
 	\href{http://pl.wikipedia.org/wiki/Gramatyka_formalna}{Gramatyka} to sposób opisu języka, czyli podzbioru zbioru wszystkich
@@ -53,12 +53,39 @@
 	
 	\begin{tw}
 		Gramatyki regularne generują tylko języki regularne
+	\end{tw}
 		
 \subsection{\href{http://pl.wikipedia.org/wiki/Gramatyka_bezkontekstowa}{Gramatyki bezkontekstowe}}
-	\end{tw}		
-		\begin{tw}
-		Gramatyki bezkontekstowe generują tylko języki bezkontekstowe
-	\end{tw}		
+	
+	\begin{df}[Gramatyka bezkontekstowa]~\\
+		$G$ jest gramatyką bezkonktekstową $\Leftrightarrow$ lewa strona każdej produkcji gramatyki $G$ jest złożona z jednego symbolu
+		nieterminalnego to znaczy ma produkcje postaci:
+			$$
+				(A, \alpha), \text{gdzie} A\in V, \alpha \in \{T,V\}\star
+			$$
+	\end{df}
+	
+	\begin{df}[Język bezkontekstowy]~\\
+		Językami bezkontekstowymi będziemy nazywać języki generowane przez gramatyki bezkontekstowe i tylko takie języki		
+		
+		\begin{uwaga}
+			Językiem generowanym przez gramatykę bezkontekstową jest zbiór słół który da się wywieść z symbolu początkowego gramatyki stosująć
+			jej produkcje
+		\end{uwaga}
+	\end{df}
+	
+	\begin{df}[Drzewo wywodu w gramatyce bezkontekstowej]~\\
+		Jest to drzewo o następujących własnościach
+		\begin{itemize}
+			\item Wierzchołki etykietowane sybolami terminalnymi, nieterminalnymi lub $\varepsilon$
+			\item Korzeń etykietowany symbolem początkowym gramatyki
+			\item Dla produkcji $A\rightarrow x_1x_2 \dots x_n$, w drzewie wierzchołek $A$ ma następniki 
+			kolejno $x_1, x_2, ..., x_n$ i odwrotnie
+			\item Jeżeli wierzchołek etykietowany jest słowem pustym ($\varepsilon$) to jest jedynym
+			następnikiem swojego przodka
+		\end{itemize}
+	\end{df}
+
 	
 	\begin{przyklad}
 		Wykazać że język palindromów jest generowany przez gramatykę bezkontekstową.
@@ -76,18 +103,44 @@
 	Klasa języków regularnych zawiera się w klasie języków bezkontekstowych
 	\end{tw}
 	
-	\subsubsection{Metody upraszczania gramatyk}
+	\subsubsection{Metody upraszczania gramatyk bezkontekstowych}
 	
-	\begin{lemat}[Usuwanie symboli bezużytecznych 1]
+	\begin{df}[Symbole beżużyteczne]~\\
+		\begin{description}
+			\item[niegenerujące] symbole nieterminalne z których nie da się wywieść ciągu symboli terminalnych (być może pustego)
+			\item[nieosiągalne] sumbole którch nie da się wywieść z symbolu początkowego
+		\end{description}				
+	\end{df}	
+	
+	\begin{lemat}[Usuwanie symboli bezużytecznych 1]\footnote{Uzasadnienie lematu można przeprowadzić alanlizuąć drzewa wywodu grmatyk}~\\
 		Dla dowolnej gramatyki bezkontekstowej $G = (V, T, P, S)$ genrującej niepusty język $L(G)$ istnieje równoważna gramatyka
 		bezkontekstowa $G' = (V', T', P', S')$ tak że z każdego symbolu nieterminalnego z $V'$ można wyprowadzić ciąg symboli terminalnych (być może pusty)
 	\end{lemat}	
 	
-	\begin{lemat}[Usuwanie symboli bezużytecznych 2]
+	\begin{lemat}[Usuwanie symboli bezużytecznych 2]\footnote{Uzasadnienie lematu można przeprowadzić alanlizuąć drzewa wywodu grmatyk}~\\
 		Dla dowolnej gramatyki bezkontekstowej $G = (V, T, P, S)$ genrującej niepusty język $L(G)$ istnieje równoważna gramatyka
 		bezkontekstowa $G' = (V', T', P', S')$ tak że każdy symbol terminalny i nieterminalny z $T' \cup V'$ można wyprowadzić
 		z  symbolu startowego $S$
 	\end{lemat}		
+	
+	\begin{alg}[Usuwanie symboli niegenerujących]~\\
+		\begin{enumerate}
+			\item Wszystkie terminale oznaczamy jako generujące
+			\item Symbole (nieterminale) mające po prawej stronie produkcji symbol/e generujące oznaczamy jako generujące
+			\item Powtarzamy punkt 2 dopóki zbiór symboli generujących nie będzie stabilny
+			\item Usuwamy wszystkie symbole nie oznaczone jako generujące oraz produkcje które je generują
+		\end{enumerate}
+	\end{alg}
+	
+	\begin{alg}[Usuwanie symboli nieosiągalnych]~\\
+		\begin{enumerate}
+			\item Oznaczamy symbol początkowy gramatyki i sumbole przez niego generowane (po prawej stronie produkcji)
+			jako osiągalne
+			\item Symbole generowane z symboli osiągalnych oznaczamy jako osiągalne
+			\item Powtarzamy punk 2 dopóki zbiór symboli osiągalnych nie będzie stabilny
+			\item Usuwamy wszystkie symvole nie oznaczone jako osiągalne oraz produkcje które je zawierają
+		\end{enumerate}
+	\end{alg}	
 	
 	\begin{tw}
 		Po zastosowani lematów w podanej kolejności uzyskamy gramatykę bez symboli bezużytecznych
@@ -101,7 +154,8 @@
 		Produkcję nazywamy wycieralną jeśli prawą strona tej produkcji można przekształcić do symbolu pustego
 	\end{df}			
 	
-	\begin{df}Metoda wyznaczania symboli wycieralnych\\
+	\begin{alg}[Metoda wyznaczania symboli wycieralnych]\footnote{Uzasadnienie poprawności tej metody polega na 
+	obserwacji własności wywodu słow w obu grmatykach -- przed i po usuwaniu}~\\
 		\begin{enumerate}
 			\item Przeglądamy produkcję i za symbole wycieralne uznajemy te symbole które po lewej stronie produkcji 
 			prowadzą w słowo puste
@@ -111,9 +165,9 @@
 				produkcji a po prawej ciągi symboli już uznanych za wycieralne
 			\end{enumerate}
 		\end{enumerate}
-	\end{df}
+	\end{alg}
 	
-	\begin{df}
+	\begin{df}[Usuwanie symboli bezużytecznych i wycieralnych]~\\
 		Jeśli $G = (V, T, P, S)$ jest gramatyką bezkontekstową i bez symboli bezużytecznych i nie generuje słowa pustego
 		to można znaleźć równoważną jej gramatykę bez symboli bezużytecznych i wycieralnych.\\
 		\emph{Metoda przekształcania}\\
@@ -123,3 +177,186 @@
 		\end{matrix}$
 		z gramatyki zawsze usuwamy produkcje w słowo puste
 	\end{df}	
+	
+	\begin{lemat}[Produkcje jednostkowe]~\\
+		Niech $G$ będzie gramatyką bezkontekstową bez symboli bezużytecznych oraz wycieralnych. Wówczas 
+		istnieje rółnoważna jej gramatyka $G'$ również bez produkcji jednostkowych
+	\end{lemat}
+	
+	\begin{alg}[Usuwanie produkcji jednostkowych]\footnote{Uzasadnienie jest analogiczne do algorytmu usuwania symboli wycieralnych}~\\
+		\begin{enumerate}
+			\item Usuwamy wszystkie produkcje w ten sam nieterminal
+			\item Produkcje z nieterminala $A$ w inny nieterminal $B$ zamieniamy na produkcję z $A$ w prawą stronę produkcji z $B$
+		\end{enumerate}
+	\end{alg}
+	
+\subsection{Postaci grmatyk bezkontekstowych}
+
+	\begin{tw}
+		Jeśli $L$ jest jezykiem bezkontekstowym, to jezyk $L' = L - \varepsilon$ też jest językiem bezkontekstowym
+	\end{tw}
+	
+	\begin{df}[\href{http://pl.wikipedia.org/wiki/Posta\%C4\%87_normalna_Chomsky\%27ego}{Postać normalna Chomskiego}]~\\
+		Gramatyka $G$ jest w postaci normalnej Chomskiego $\Leftrightarrow$ gdy wszyskieg jej produkcje są postaci:
+		\begin{itemize}
+			\item $A\rightarrow BC$
+			\item $A \rightarrow \alpha$
+		\end{itemize}
+		gdzie $A,B,C \in V$ (symbole nieterminalne), $\alpha \in T$ (symbol terminalny)
+	\end{df}
+	
+	\begin{lemat}
+		Każdą gramatykę bezkontekstową, która nie generuje słowa pustego można przekształcić do postaci Chomskiego
+	\end{lemat}
+	
+	\begin{alg}[Przekształcanie do postaci Chomskiego]~\\
+		\begin{enumerate}
+			\item Usuwamy z gramatyki symbole bezużyteczne, wycieralne i produkcje jednostkowe
+			\item Jeżeli po prawej stronie występuje więcej niż jeden (1) symbol, to wszystkie
+			terminale tam występujące zamieniamy na nowe nieterminale i dodajemy
+			nowe produkcje z nowych nieterminali w odpowiadające im terminale
+			\item Wszytkie pozostałe produkcje w ciąg nieterminali długości większej niż dwa (2)
+			modyfikujemy w sposób następujący
+				\begin{enumerate}
+					\item Dopóki ciąg nieterminali po prawej stronie produkcji nie zmniejszy się do długości dwa (2)
+					zastępujemy jakąś parę nieterminali z tego ciągu nowym nieterminalem i dodajemy nową produkcję
+					z nowego nieterminala w dwa stare, usunięte nieterminale
+				\end{enumerate}
+		\end{enumerate}
+	\end{alg}
+	
+	\begin{uwaga}
+		Drzewo wywodu słowa w gramatyce bezkontekstowej w postaci Chomskiego jest drzewem binarnym
+	\end{uwaga}
+	
+	\begin{df}[\href{http://pl.wikipedia.org/wiki/Posta\%C4\%87_normalna_Greibach}{Postać noramlna Greibach}]~\\
+		Gramatka bezkontekstowa $G$ jest w postaci Greibach $\Leftrightarrow$ wszystkie jej produkcje są postaci:
+		$$
+			A \rightarrow a\alpha
+		$$
+		gdzie $a\in T$, $\alpha \in V\star$ (ciąg nieterminali)
+	\end{df}
+	
+	\begin{lemat}
+		Każdą gramatykę bezkontekstową nie generującą słowa pustego da się sporowadzić do postaci Greibach
+	\end{lemat}
+	
+	\begin{alg}[Przekształcanie do postaci Greibach]~\\
+		\begin{enumerate}
+			\item Sprowadzamy gramatykę do postaci Chomskiego
+			\item Numerujemy symbole nieterminalne (ustawiając je w ciąg $V = \{A_1, A_2, \dots, A_n\}$
+			\item Otrzymane $A_i$ produkcje spełniają warunek, że dla $i=1,\dots, k-1$ produkcje z $A_i$ są postaci
+				\begin{itemize}\label{warunek}
+					\item $A_i \rightarrow a\alpha$, gdzie $a\in T$ i $\alpha\in V\star$
+					\item $A_i \rightarrow A_j\alpha$, gdzie $j > i$ 
+					oraz $A_j$ jest nieterminalem z naszego ciągu o indeksie $j$ i $\alpha \in V\star$
+				\end{itemize}
+			Ponadto $A_k$ nie spełnia tego warunku wiec mamy dwa przypadki
+				\begin{enumerate}
+					\item $A_k \rightarrow A_j\alpha$ oraz $j < k$\label{1}
+					\item $A_k \rightarrow A_k\alpha$\label{2}
+				\end{enumerate}
+			\item W przypadku \ref{1} zastępujemy nieterminale $A_j$ prawymi stronami $A_j$-produkcji
+			i postępujemy tak aż do wyeliminowania problemu, po czym wracamy do punktu 3, chyba że $k = n$
+			\item W przypadku gdy natrafiliśmy na sytuację \ref{2} usuwamy problem w sposób następujący:
+				\begin{enumerate}
+					\item Produkcję $A_k \rightarrow A_k\alpha_1|A_k\alpha_2|\dots|A_k\alpha_m|\beta_1|\dots|\beta_n$
+					zastępujemy produkcjami:
+					$$
+						A_k \rightarrow \beta_1|\dots|\beta_n|\beta_1B_k|\dots|\beta_nB_k \\
+						B_k \rightarrow \alpha_1|\dots|\alpha_m|\alpha_1B_k|\dots|\alpha_mB_k
+					$$, gdzie $B_k$ jest nowym nieterminalem
+					\item Stosujac punkt 4 i 5 zapewniliśmy spełnienie warunku \ref{warunek} przez $A_k$ i możemy zająć się produkcją $A_{k+1}$
+					\item Powtarzamy czynność z punktu 3 i w miarę potrzeb 4 i 5 aż wszystkie $A_i$ nie będą spełniały \ref{warunek}
+				\end{enumerate}
+			\item Wszystkie produkcje $A_i \rightarrow a\alpha$ są już w postaci Greibach natomiast produkcje pozostałe które są w postaci
+			$A_i\rightarrow A_j\alpha$, $j > i$ modyfikujemy zamieniając $A_j$ na prawą stronę produkcji $A_j$
+		\end{enumerate}
+	\end{alg}
+	
+\subsubsection{Sprawdzanie czy język jest bezkontekstowy}
+
+	\begin{df}[Niejednoznaczność gramatyki]~\\
+		Gramatykę nazywamy niejednoznaczną $\Leftrightarrow$ istnieje takie słowo dla którego istnieje więcej niż jedno drzewo wywodu		
+	\end{df}
+	
+	\begin{lemat}[\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j\%C4\%99zyk\%C3\%B3w_bezkontekstowych}{O pompowaniu (dla języków bezkontekstowych)}]~\\
+		Jeśli $L$ jest językiem bezkontekstowym, to istnieje stała $n_L$ taka że dla
+		dowolnego słowa $z\in L$ spełniony jest warunek:
+		$$
+			(|z| \geqslant n_L) \Rightarrow [( \exists_{u,v,w,x,y} z = uvwxy \wedge |vwx| \leqslant n_L \wedge |vx| \geqslant 1) \forall_{i=0,1,\dots} z_i = uv^iwx^iy \in L]
+		$$
+		\begin{uwaga}
+			Lemat o pompowaniu dla języków regularnych jest szczególnym przypadkiem tego lematy
+		\end{uwaga}
+		
+		\begin{proof}~\\
+			\begin{enumerate}
+				\item Jeżeli $L$ jest skończony, to lemat jest prawdzimy (wystarczy przyjąć $n_L$ wieksze niż długość najdłuższego słowa)
+				\item Język jest nieskończony
+					\begin{enumerate}
+						\item Skoro język jest bezkontekstowy to weźmy gramatykę $G$ w postaci Chomskiego generującą ten język. Wtedy 
+						drzewo wywodu słów z $L$ będą drzewami binarnymi. Drzewo wywodu mające $k$ liści ma zatem $log_2k$ poziomów
+						(wysokość $h = log_2k$). Zatem liczba krawędzi między ścieżkami z korzenia do liścia jest nie mniejsza niż $h$.
+						Wierzchołki ścieżki oprócz ostatniego etykietujemy symbolami nieterminalnymi a ostatni sybolem terminalnym.
+						\item Niech $|V| = n$ (mamy $n$ symboli nieterminalnych), wtedy przynajmniej $n_L = 2^{n+1}$, a co za tym 
+						idzie drzewo wywodu słowa $z$ o długości nie mniejszej niż $n_L$ będzie miało wysokość przynajmniej $n+1$
+						Wynika z tego że na ścieżce korzeń-liść pojawią się przynajmniej dwa wierzchołki etykietowane tym samym terminalem
+						\item Oznaczamyu przez $A_i$ najbliższe wystąpienie powtarzającego się nieterminala licąć od liścia, a przez $A_k$
+						jego drugie wystąpienie. Oznaczamy przez $w$ plon poddrzewa $A_l$ oraz przez $v$ i $x$ części plony poddrzewa $A_k$
+						pozostałe po wyłączeniu w. Oznaczamy przez $u$ i $y$ części plony całego drzewa pozostałę po wyłączeniu $vwx$. 
+						Poprez takie oznaczenia podzieliliśmy słowo $z$ na pięć części $z = uvwx$. Z wyboru najbliższej pary
+						powtarzających się nieterminali wynika że $|vwx| \leqslant n_L$, bo długość ścieżki jest nie większa $n+1$
+						($A$ wybieramy dwukrotnie, a pozostałe nieterminale najwyżej jednokrotnie)
+						\item Dla $i=0$ z lematu równoważnym jest zastąpienie poddrzewa $A_k$ poddrzewem $A_L$ takie drzewo wywodu jest 
+						nadal poprawnym drzewem wywody w gramatyce $G$, a na dodatek generuje słowo $z_0 = uwy$
+						\item Ostatnią rzeczą którą trzeba pokazać to że dla $i = k \geqslant 2$  z lematu równoważnym jest $k$-krotnemu
+						zastąpieniu poddrzewa $A_L$ przez poddrzewo $A_\alpha$. Znowy otrzymamy drzewo wywodu w gramatyce $G$, tym
+						razem generujące słowo $z_k = uv^kwx^ky$.
+					\end{enumerate}					 
+			\end{enumerate}
+		\end{proof}				
+	\end{lemat}
+			
+	\begin{lemat}[Zaprzeczenie lematu o pompowaniu]~\\
+		Jeśli dla dowolnej stałej $n\in\mathbb{N}$ istnieje $z\in L$ takie że
+		$$
+			(|z| \geqslant n_L) \Rightarrow [( \forall_{u,v,w,x,y} z = uvwxy \wedge |vwx| \leqslant n_L \wedge |vx| \geqslant 1) \exists_{i=0,1,\dots} z_i = uv^iwx^iy \not\in L]
+		$$
+		to język $L$ nie jest językiem bezkontekstowym
+	\end{lemat}			
+		
+	\begin{lemat}[\href{http://pl.wikipedia.org/wiki/Lemat_Ogdena}{Ogdena}]~\\
+		Jeśli $L$ jest językiem bezkontekstowym, to istnieje stała $n_L$ taka, że dla dowolnego słowa z języka $L$, w którym wyróżniono przynajmniej
+		$n_L$ symboli spełniony jest warunek:\\
+		Istnieje taki podział słowa $z$ na pięć części $z = uvwxy$ takich że:
+		\begin{enumerate}
+			\item $vx$ zawiera przynajmniej jeden wyróżniony symbol
+			\item $vwx$ zawiera co najwyżej $n_L$ wyróżnionych symboli
+			\item $(\forall i\geqslant 0) \quad uv^iwx^iy \in L$
+		\end{enumerate}
+		
+		\begin{proof}
+			Dowód jest analogiczny do dowodu lematu o pompowaniu, z tym że konstrukcja ścieżki ulega drobnej modyfikacji.
+			Podczas konstrukcji ścieżki wybieramy następnika którego poddrzewo o korzeniu w tym wierzchołku zawiera nie
+			mniej wyróżnionych symboli, niż poddrzewo drugiego następnika
+		\end{proof}			
+		
+		\begin{uwaga}
+			Lemat o pompowaniu jest szczególnym przypadkiem lematu Ogdena
+		\end{uwaga}
+	\end{lemat}	
+	
+	\begin{lemat}[Zaprzeczenie lematu Ogdena]~\\
+		Jeśli dla $\forall n\in \mathbb{N}$ istnieje słowo $z \in L$ w którym wyróżniono co najmniej $n$ symboli oraz
+		dla każdego podziału słowa na pięć części takiego że
+		\begin{itemize}
+			\item $vx$ zawiera przynajmniej jeden wyróżniony symbol
+			\item $vwx$ zawiera co najwyżej $n$ wyróżnionych symboli
+		\end{itemize}
+		$$
+		(\exists i=1,2,\dots) \quad uv^iwx^iy \in L
+		$$
+		to język $L$ nie jest językiem bezkontekstowym
+	\end{lemat}			
+		
