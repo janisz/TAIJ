@@ -104,13 +104,15 @@
 		Język $L$ jest regularny $\Leftrightarrow$ liczba kals abstrakcji relacji $R_L$ indukowanej przez ten język jest skończona.
 	\end{lemat}	
 	
-	\begin{lemat}{\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j%C4%99zyk%C3%B3w_regularnych}{O pompowaniu}}
+	\begin{lemat}{\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j\%C4\%99zyk\%C3\%B3w_regularnych}{O pompowaniu}}
 		Jeśli język $L$ jest regularny to istnieje stała $n_L$ taka że dla każdego słowa $z\in L$ spełniona jest implikacja
 		\footnote{jeśli słowo jest dłuższe niż $n_L$ to istnieje taki podział słowa $z$ na 3 części taki, że suma długości pierwszej
 		i drugiej jest mniejsza niż $n_i$ i trzecia nie jest pusta. Wtedy słowo $z$ złożone z częśi pierwszej połączonej z powieloną 
 		częścią drugą i zakończone częścią trzecią należy do $L$}
-		$$|z| \geqslant n_L \Rightarrow (\exists u,v,w ~~ z = uvw ~~ |uv| \leqslant n_L, ~~ |v| \geqslant 1)
-		(\forall i\in\mathbb{N}) z_i = uv^iw \in L$$
+		\begin{eqnarray}
+			|z| \geqslant n_L \Rightarrow (\exists u,v,w ~~ z = uvw ~~ |uv| \leqslant n_L, ~~ |v| \geqslant 1)
+			(\forall i\in\mathbb{N}) z_i = uv^iw \in L
+		\end{eqnarray}
 	\end{lemat}
 	
 	\begin{lemat}{Kontrapozycja lematu o pompowaniu}

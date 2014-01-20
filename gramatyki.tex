@@ -19,7 +19,9 @@
 	\begin{df}
 	Językiem generowanym przez gramatykę $G$ nazywamy zbiór słów nad alfabetem terminali, które pozostają w relacji wywodu z 
 	symbolem początkowym.
-	$$ L(G) = \{ w\in T^\star: S \Rightarrow w \} $$
+		\begin{eqnarray}
+			L(G) = \{ w\in T^\star: S \Rightarrow w \}
+		\end{eqnarray}
 	\end{df}
 	
 	\begin{df}
@@ -28,10 +30,11 @@
 	\end{df}
 	
 	\begin{df}
-	Gramatykę nazywamy prawostronnie liniową $\Leftrightarrow$ wszystkie jej produkcje są postaci $\begin{matrix}
-	A&\rightarrow&wB \\
-	A&\rightarrow&w
-	\end{matrix}$
+	Gramatykę nazywamy prawostronnie liniową $\Leftrightarrow$ wszystkie jej produkcje są postaci 
+	\begin{eqnarray}
+		A&\rightarrow&wB \\
+		A&\rightarrow&w
+	\end{eqnarray}
 	gdzie $A, B \in V, ~ w\in T^\star$\footnote{początkowe wielkie litery alfabetu oznaczają symbole nieterminalne, 
 	natomiast początkowe małe litery alfabetu to symbole terminalne. Greckie litery oznaczają ciągi symboli terminalnych i nieterminalnych
 	Końcowe litery alfabetu oznaczają ciągi terminali}	 
@@ -231,9 +234,9 @@
 	
 	\begin{df}[\href{http://pl.wikipedia.org/wiki/Posta\%C4\%87_normalna_Greibach}{Postać noramlna Greibach}]~\\
 		Gramatka bezkontekstowa $G$ jest w postaci Greibach $\Leftrightarrow$ wszystkie jej produkcje są postaci:
-		$$
+		\begin{equation}
 			A \rightarrow a\alpha
-		$$
+		\end{equation}
 		gdzie $a\in T$, $\alpha \in V\star$ (ciąg nieterminali)
 	\end{df}
 	
@@ -262,10 +265,11 @@
 				\begin{enumerate}
 					\item Produkcję $A_k \rightarrow A_k\alpha_1|A_k\alpha_2|\dots|A_k\alpha_m|\beta_1|\dots|\beta_n$
 					zastępujemy produkcjami:
-					$$
-						A_k \rightarrow \beta_1|\dots|\beta_n|\beta_1B_k|\dots|\beta_nB_k \\
-						B_k \rightarrow \alpha_1|\dots|\alpha_m|\alpha_1B_k|\dots|\alpha_mB_k
-					$$, gdzie $B_k$ jest nowym nieterminalem
+					\begin{eqnarray}
+						A_k &\rightarrow& \beta_1|\dots|\beta_n|\beta_1B_k|\dots|\beta_nB_k \\
+						B_k &\rightarrow& \alpha_1|\dots|\alpha_m|\alpha_1B_k|\dots|\alpha_mB_k									
+					\end{eqnarray}
+					gdzie $B_k$ jest nowym nieterminalem
 					\item Stosujac punkt 4 i 5 zapewniliśmy spełnienie warunku \ref{warunek} przez $A_k$ i możemy zająć się produkcją $A_{k+1}$
 					\item Powtarzamy czynność z punktu 3 i w miarę potrzeb 4 i 5 aż wszystkie $A_i$ nie będą spełniały \ref{warunek}
 				\end{enumerate}
@@ -280,12 +284,16 @@
 		Gramatykę nazywamy niejednoznaczną $\Leftrightarrow$ istnieje takie słowo dla którego istnieje więcej niż jedno drzewo wywodu		
 	\end{df}
 	
+	\begin{df}[Plon drzewa]~\\
+		Plonem drzewa nazywamy wszystkie słowa które można wyprowadzić z danego drzewa
+	\end{df}	
+	
 	\begin{lemat}[\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j\%C4\%99zyk\%C3\%B3w_bezkontekstowych}{O pompowaniu (dla języków bezkontekstowych)}]~\\
 		Jeśli $L$ jest językiem bezkontekstowym, to istnieje stała $n_L$ taka że dla
 		dowolnego słowa $z\in L$ spełniony jest warunek:
-		$$
+		\begin{equation}
 			(|z| \geqslant n_L) \Rightarrow [( \exists_{u,v,w,x,y} z = uvwxy \wedge |vwx| \leqslant n_L \wedge |vx| \geqslant 1) \forall_{i=0,1,\dots} z_i = uv^iwx^iy \in L]
-		$$
+		\end{equation}
 		\begin{uwaga}
 			Lemat o pompowaniu dla języków regularnych jest szczególnym przypadkiem tego lematy
 		\end{uwaga}
@@ -320,9 +328,9 @@
 			
 	\begin{lemat}[Zaprzeczenie lematu o pompowaniu]~\\
 		Jeśli dla dowolnej stałej $n\in\mathbb{N}$ istnieje $z\in L$ takie że
-		$$
+		\begin{equation}
 			(|z| \geqslant n_L) \Rightarrow [( \forall_{u,v,w,x,y} z = uvwxy \wedge |vwx| \leqslant n_L \wedge |vx| \geqslant 1) \exists_{i=0,1,\dots} z_i = uv^iwx^iy \not\in L]
-		$$
+		\end{equation}
 		to język $L$ nie jest językiem bezkontekstowym
 	\end{lemat}			
 		
@@ -354,9 +362,65 @@
 			\item $vx$ zawiera przynajmniej jeden wyróżniony symbol
 			\item $vwx$ zawiera co najwyżej $n$ wyróżnionych symboli
 		\end{itemize}
-		$$
-		(\exists i=1,2,\dots) \quad uv^iwx^iy \in L
-		$$
+		\begin{equation}
+			(\exists i=1,2,\dots) \quad uv^iwx^iy \in L
+		\end{equation}
 		to język $L$ nie jest językiem bezkontekstowym
-	\end{lemat}			
+	\end{lemat}	
+
+\subsection{Gramatyki kontekstowe}
+
+	\begin{df}[\href{http://pl.wikipedia.org/wiki/Gramatyka_kontekstowa}{Gramatyka kontekstowa}]~\\
+		Gramatykę $G$ nazywamy kontekstową $\Leftrightarrow$ wszystkie prodykcje gramatyki $G$ są nieskracalne
+		to znaczy są postaci 
+		\begin{equation}
+			\alpha\rightarrow\beta
+		\end{equation}
+	    gdzie $\alpha,\beta\in (V\cup T)^\star$ oraz $0<|\alpha|\leqslant |\beta|$
+	\end{df}			
 		
+	\begin{df}[Język kontekstowy]~\\
+		Językami kontekstowymi nazywamy języki generowane przez gramatyki kontekstowe i tylko takie języki
+	\end{df}	
+	
+	\begin{tw}
+		Klasa języków bezkontekstowych bez słowa pustego zawiera się w klasie języków kontekstowych
+	\end{tw}
+
+	\begin{df}[Postać normalna gramatyki kontekstowej]~\\
+		Postacią noramlną gramatyki kontekstowej $G$ nazywamy gramatykę, której wszystkie produkcje są postaci
+		\begin{equation}
+			\gamma A \delta \rightarrow \gamma \alpha \delta
+		\end{equation}
+		gdzie $A\in V$ oraz $\alpha,\gamma,\delta\in (V\cup T)^\star \wedge \alpha \neq \varepsilon$
+	\end{df}
+	
+	\begin{lemat}
+		Każdą gramatykę kontekstową można sprowadzić do postaci normalnej
+	\end{lemat}
+	
+	\begin{alg}[Przekształcanie do postaci noramlnej]~\\
+		\begin{enumerate}
+			\item Przekształcamy tylko produkcje które nie są w postaci noramlnej
+			\item W tych produkcjach terminale zastępujemy dodatkowymi nieterminalami i dostajemy nowe produkcje
+			z tych nieterminali w zastąpione terminale
+			\item Pozostałę produkcje nie będące w postaci normalnej wyglądają następująco
+				\begin{equation}
+					A_1A_2A_3\dots A_k \rightarrow B_1B_2\dots B_k\dots B_{k+l}, \quad l > 1, k \leqslant l 
+				\end{equation}
+			zastępujemy je poniższymi produkcjami:
+				\begin{itemize}
+					\item Tworzymy nowy symbol nieteminalny $A^r_k$
+					\item Nowe produkcje
+						\begin{eqnarray}						
+							A_1A_2A_3\dots A_{k-1}A_k &\rightarrow& A_1\dots A_{k-1}A^r_k \\
+							A_1A_2A_3\dots A_{k-1}A^r_k &\rightarrow& B_1A_2\dots A_{k-1}A^r_k \\
+							B_1A_2A_3\dots A_{k-1}A^r_k &\rightarrow& B_1B_1A_3\dots A_{k-1}A^r_k\\
+							&\vdots&\\
+							B_1\dots B_{k-1}A^r_k &\rightarrow& B_1B_2\dots B_k\dots B_{k-l}\\
+						\end{eqnarray}
+				\end{itemize}
+		\end{enumerate}
+	\end{alg}
+	
+	
