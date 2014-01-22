@@ -1,0 +1,165 @@
+\section{Maszyny Turinga}
+\begin{df}[Maszyna Turinga - model podstawowy]~\\
+	Maszyną Turinga w modelu podstawowym nazywamy system 
+	\begin{equation}
+		M = (Q, \Sigma, \Gamma, \delta, q_0, B, F)
+	\end{equation}
+	\begin{description}
+		\item[$Q$] -- skończony zbiór stanów
+		\item[$\Sigma$] -- zbiór symboli wejściowych
+		\item[$\Gamma$] -- skończony zbiór wszystkich symboli będący alfabetem taśmy
+		\item[$\delta$] -- funkcja przejścia $\delta = Q\times\Gamma \rightarrow Q\times\Gamma\times\{L,P\}$
+		\item[$q_0$] -- stan początkowy $q_0 \in Q$
+		\item[$B$] -- zdefiniowany symbol pusty $B\in\Gamma$
+		\item[$F$] -- zbiór stanów akceptujących $F\subset Q$
+	\end{description}
+	\begin{uwaga}
+		Obliczenie Maszyny Turinga polega na wykonaniu kolejnych ruchów określonych funkcją przejścia
+	\end{uwaga}		
+	\begin{uwaga}
+		Obliczenie może się zakończyć ale może też być kontynuowane w nieskończoność
+	\end{uwaga}
+\end{df}
+
+\begin{df}[Relacja ruchu]
+	Obliczeniem Maszyny Turinga nazywamy ciąg opisów chwilowych pozostających w relacji
+\end{df}
+
+\begin{df}[Maszyna Turinga z własnością stopu]~\\
+	Maszyny Turinga które zawsze kończą obliczenie niezależnie od danych nazywamy Maszynami Turinga 
+	z własnością stopu albo algorytmami
+\end{df}
+
+\begin{df}[Maszyna Turinga z własnością stopu ze stanem akceptującym]~\\
+	Maszyną Turinga z własnością stopu ze stanem akceptującym nazywamy system
+	\begin{equation}
+		M = (Q, \Sigma, \Gamma, \delta, q_0, B, F = \{ACC\})
+	\end{equation}
+	Przy czym istnieje założenie, że przejście do stanu akceptującego jest zakończeniem obliczeń
+\end{df}
+
+\begin{df}[Maszyna Turinga z własnością stopu]~\\
+	Maszyną Turinga z własnością stopu nazywamy system 
+	\begin{equation}
+		M = (Q, \Sigma, \Gamma, \delta, q_0, B, F = \{ACC\}, N = \{REJ\})
+	\end{equation}
+	gdzie $N$ to zbiór stanów odrzucających.
+	\begin{itemize}
+		\item Zakończenie obliczeń jest równoważne przejściu do stanu akceptującego lub odrzucającego
+		\item Maszyna kończy każde swoje obliczenie
+	\end{itemize}
+	\begin{uwaga}
+		Maszyna nie akceptuje wszystkich języków akceptowanych przez Maszynę Turinga w modelu 
+		podstawowym, jet jej szczególnym przypadkiem
+	\end{uwaga}
+\end{df}
+
+\begin{df}[Maszyna Turinga z wartownikiem]~\\
+	Maszyną Turinga z wartownikiem nazywamy system $M = (Q, \Sigma, \Gamma, \delta, q_0, B, F)$
+	z tym że alfabet taśmy posiada specjalny symbol $\#$ nazywany wartownikiem, zapisany w pierwszej 
+	komórce taśmy.
+	\begin{uwaga}
+		Ta maszyna jest równoważna Maszynie Turinga w modelu podstawowym
+	\end{uwaga}
+\end{df}
+
+\begin{df}[Maszyna Turinga z taśmą wielościeżkową]~\\
+	Maszyną Turinga z taśmą wielościeżkową nazywamy system $M = (Q, \Sigma, \Gamma, \delta, q_0, B, F)$,
+	gdzie funkcja przejścia zdefiniowana jest następująco
+	\begin{equation}
+		\delta : Q\times\Gamma^k\rightarrow G\times\Gamma\times\{L,P\}
+	\end{equation}
+\end{df}
+
+\begin{tw}
+	Maszyna Turinga z taśmą wielościeżkową jest równoważna Maszynie Turinga w modelu podstawowym (jednościeżkowej)
+\begin{uwaga}
+	Można ją zastąpić maszyną jednościeżkową kosztem zwiększenia alfabetu taśmy, który będzie
+	iloczynem kartezjańskim alfabetów ścieżek.
+	Aby formalnie udowodnić równoważność tych maszyn należałoby skonstruować maszynę symulującą
+	działanie drugiej podobnie jak w Maszynie Turinga z wartownikiem.
+\end{uwaga}
+\end{tw}
+
+\begin{tw}
+	Maszyny Turinga z taśmą obustronnie nieograniczoną są równoważne Maszyną Turinga w modelu podstawowym
+	
+	\begin{proof}
+	Wystarczy pokazać że dla maszyny jednego typu jesteśmy w stanie stworzyć maszynę drugiego typu akceptującą ten sam
+	język.
+	\begin{itemize}
+		\item Maszyna z taśmą obustronnie nieograniczoną symulująca pracę maszyny w modelu podstawowym byłaby
+		zdefiniowana identycznie jak symulowana maszyna.	W oczywisty sposób akceptowałaby ten sam język.
+		\item Symulacja maszyny z taśmą obustronnie nieograniczoną przez maszynę w modelu podstawowym. 
+		Ponieważ Maszyna Turinga wielościeżkowa jest równoważna maszynie w modelu podstawowym, pokażemy
+		równoważność do wielościeżkowej. Zatem maszyna symulująca będzie maszyną dwuścieżkową, dodatkowo można pokusić się o 
+		wprowadzenie wartownika. Koncept na realizację maszyny symulującej jest następujący:
+			\begin{enumerate}
+				\item Jeśli maszyna symulowana prowadzi obliczenia na lewo od pierwszego znaku lub wartownika
+				to obliczenia prowadzone są na dolnej taśmie maszyny symulującej.
+				\item W przeciwnym przypadku obliczenia prowadzone są na górnej taśmie.
+				\item Należy wziąć pod uwagę inwersję ruchów w lewo/prawo na dolnej taśmie
+			\end{enumerate}
+	\end{itemize}
+	\end{proof}
+\end{tw}
+
+\begin{df}[Wielotaśmowa Maszyna Turinga]~\\
+	k-taśmową Maszyną Turinga nazywamy system
+	\begin{equation}
+		M = (Q, \Sigma, \Gamma_1\times\dots\times\Gamma_k, \delta, q_0, B, F)
+	\end{equation}
+	gdzie funkcja przejścia zdefiniowana jest następująco
+	\begin{equation}
+		\delta: Q\times(\Gamma_1\times\dots\times\Gamma_k) \rightarrow Q\times(\Gamma_1\times\dots\Gamma_k)\times\{L,R,S\}^k
+	\end{equation}
+\end{df}
+
+\begin{tw}
+	Klasa Maszyn Turinga wielotaśmowych jest równoważna klasie Maszyn Turinga w modelu podstawowym
+	\begin{proof}
+		Każda maszyna jednotaśmowa jest szczególnym przypadkiem maszyny wielotaśmowej. Ponieważ maszyna obustronnie
+		ograniczona jest równoważna podstawowej to implikacja w jedną stronę jest trywialna.\\\\
+		Pokażemy symylację wielotaśmowej maszyny yżywając Maszyny Turinga z taśmą obustronnie nieograniczoną o $2k$ 
+		ścieżkach. Każdej taśmie będzie odpowiadać para ścieżek maszyny symulującej.
+		Górna ścieżka każdej pary będzie zawierać symbol oznaczający położenie głowicy w maszynie symulowanej natomiast
+		dolna będzie zawierać symulowaną taśmę.
+		Symulacja będzie przebiegać następująco
+		\begin{enumerate}
+			\item Głowica maszyny symulującej znajduje się nad najbardziej na lewo wysuniętym symbolem -- znacznikiem głowic
+			\item Głowica maszyny symulującej przesuwa się w prawo aż do najbardziej na prawo wysuniętego znacznika głowic.
+			Zapamiętuje przy tym informację o symbolach czytanych przez głowicę maszyny wielotaśmowej -- 
+			potrzebny jest odpowiednio duży zbiór stanów.
+			\item Mając informację o stanie i symbolach pod głowicami maszyny wielotaśmowej, maszyna 
+			symulująca zapamiętuje pełną informację o stanie Maszyny wielotaśmowej w odpowiadającym mu stanie.
+			Oznacza to że maszyna symulująca jest teraz w stanie wyznaczyć opis chwilowy maszyny symulowanej 
+			przed wykonaniem ruchu. Następnie stosując funkcje przejścia może wyznaczyć opis chwilowy po wykonaniu ruchu.
+			\item Głowica maszyny symulującej przesuwa się do najbardziej na lewo wysuniętego symbolu oznaczającego położenie
+			głowicy w modelu wielotaśmowym (znacznik głowicy). W trakcie tego powrotu maszyna symulująca uaktualnia odpowiednie
+			komórki ścieżek opisujące taśmy maszyny symulowanej, a także położenie znaczników głowic.
+			\item Głowica maszyny symulującej zatrzyma się na najbardziej na lewo położonym znacznikiem głowic 
+			oraz zmieni stan zgodnie ze mianą stanu maszyny symulowanej.
+		\end{enumerate}
+	\end{proof}
+	\begin{uwaga}
+		Symulacja maszyny wielotaśmowej jednotaśmową skutkuje wzrostem złożoności obliczeniowej z kwadratem ruchów.
+	\end{uwaga}
+\end{tw}
+
+\begin{df}[Niedeterministyczna Maszyna Turinga]~\\
+	Definicja jest analogiczna do Maszyny Turinga w modelu podstawowym z tym że funkcja przejścia
+	zdefiniowana jest następująco
+	\begin{equation}
+		\delta: Q\times\Gamma \rightarrow \bigcup^\infty_{k=0} (Q\times\Gamma\times\{L,R\})^k\quad
+		\footnote{Dla $k=0$ wartość jest nieokreślona}
+	\end{equation}
+	Zatem ruch tej maszyny polega na niedeterministycznym wyborze jednej z wartości funkcji przejścia,
+	a następnie wykonaniu ruchu takiego jaki wykonałaby deterministyczna maszyna.
+	\begin{uwaga}
+		Obliczenie niedeterministycznej Maszyny Turinga jest drzewem w którym
+		\begin{itemize}
+			\item wierzchołki etykietowane są opisem chwilowym maszyny	
+			\item potomkami dowolnego wierzchołka są wierzchołki pozostające z nim w relacji ruchu
+		\end{itemize}
+	\end{uwaga}
+\end{df}
