@@ -1,0 +1,204 @@
+\begin{df}[Automaty liniowo ograniczone]~\\
+	Automaty liniowo ograniczone są to Maszyny Turinga z własnością stopu, które prowadzą obliczenia
+	tylko na części taśmy będącej o długości równej wielokrotności długości słowa wejściowego.
+	Dodatkowo maszyna ta musi być jednotaśmowa.
+\end{df}
+
+\begin{tw}
+	Klasa języków akceptowanych przez automaty liniowo ograniczone zawiera się (bez równości) w
+	klasie języków akceptowanych przez Maszyny Turinga z własnością stopu.
+\end{tw}
+
+\begin{tw}
+	Automaty liniowo ograniczone akceptują języki kontekstowe.
+	\begin{proof}
+		Idea konstrukcji automatu równoważnego gramatyce nieograniczonej.
+		Mając zadaną gramatykę nieograniczoną $G$:
+		\begin{enumerate}
+			\item Tworzymy 2-taśmową Maszynę Turinga
+			\item Na pierwszej taśmie zapisujemy słowo wejściowe
+			\item Na drugiej taśmie prowadzimy obliczenia według schematu
+				\begin{enumerate}
+					\item na drugiej taśmie umieszczamy symbol początkowy gramatyki
+					\item w niedeterministyczny sposób wybieramy fragment słowa na drugiej taśmie
+					\item do wybranego fragmentu stosujemy niedeterministycznie wybraną produkcję
+				\end{enumerate}
+			\item Sprawdzamy czy zawartość pierwszej taśmy jest równa zawartości drugiej taśmy i 
+			jeśli tak to kończymy obliczenie akceptując słowo.
+		\end{enumerate}
+	\end{proof}
+\end{tw}
+
+\begin{tw}
+	Gramatyki nieograniczone generują języki rekurencyjnie przeliczalne i są równoważne Maszyną Turinga
+	\begin{proof}
+		Idea konstrukcji automatu równoważnego gramatyce bezkontekstowej.
+		Mając zadaną gramatykę kontekstową $G$:
+		\begin{itemize}
+			\item Tworzymy automat linowo ograniczony
+			\item Reszta jest analogiczna do idei konstrukcji automatu równoważnego gramatyce
+			nieograniczonej. Różnica polega na tym, że ze względu na ograniczenie długości
+			taśmy oraz nieskracalność gramatyki obliczenie zawsze się skończy.
+		\end{itemize}
+	\end{proof}
+\end{tw}
+
+\begin{df}[Automaty ze stosem]
+	Automatem ze stosem nazywamy system 
+	\begin{equation}
+		M = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)
+	\end{equation}
+	gdzie $Z_0$ jest początkiem stosu a funkcja przejścia zdefiniowana jest następująco
+	\begin{equation}
+		\delta : Q \times \{\Sigma \cup \{ \varepsilon \} \}	\times \Gamma \rightarrow 
+		\sum_{k=0}^\infty (Q\times\Gamma^\star)^k
+	\end{equation}
+\end{df}
+
+\begin{tw}
+	Klasa automatów deterministycznych ze stosem jest równoważna klasie automatów ze stosem niedeterministycznym
+\end{tw}
+
+\begin{tw}
+	Automat ze stosem jest Maszyną Turinga, to znaczy można skonstruować Maszynę Turinga równoważną automatowi ze stosem
+	\begin{proof}
+		Pokażemy, że każdy automat ze stosem może być symulowany przez Maszynę Turinga z własnością stopu.
+		\begin{itemize}
+			\item Zakładamy, że dany jest automat ze stosem $M$
+			\item Oznaczamy przez $M_T$ konstruowaną przez nasz Maszynę Turinga, która posiada dwie taśmy
+			\item Pierwsza taśma symulować będzie taśmę wejściową automatu ze stosem
+			\item Druga taśma symulować będzie stos
+			\item Schemat ruchu (symulacji) o numerze $t$ automatu przez Maszynę Turinga
+				\begin{enumerate}
+					\item Jeśli druga taśma jest pusta, to jest to równoważne z pustym stosem. 
+					Przechodzimy zatem do następnego stanu (być może akceptującego) 
+					zgodnie z pewną funkcją przejścia
+					\item Jeśli druga taśma nie jest pusta, odczytujemy po kolei wartości na drugiej taśmie
+					pierwszą pozostawiając nienaruszoną i przechodzimy do kolejnych stanów uaktualniając nasz
+					symulowany stos. Po uaktualnieniu stosu przechodzimy do następnego stanu wymazując
+					wczytany znak na pierwszej taśmie. Musimy zadbać aby głowica drugiej taśmy wróciła na swoje
+					miejsce.					
+				\end{enumerate}
+		\end{itemize}
+	\end{proof}
+\end{tw}
+
+\begin{tw}
+	Klasa automatów ze stosem jest równoważna klasie gramatyk bez kontekstowych
+	\begin{proof}
+	\begin{enumerate}
+		\item Mając podaną gramatykę bez kontekstową $G$ transformujemy ją do postaci Geribach
+		\item Konstruujemy automat z pustym stosem oraz jednym stanem. Który obliczamy następująco
+			\begin{enumerate}
+				\item Na wejściu umieszczamy analizowane słowo, a na stosie symbol początkowy gramatyki
+				\item Na podstawie wczytanego znaku oraz nieterminala na wierzchu stosu niedeterministycznie
+				wybieramy produkcję z nieterminala na szczycie stosu w ciąg symboli zaczynających się
+				od wczytanego znaku.
+				Wybór polega na niedeterministycznym wyborze takiego przejścia w automacie aby wierzchołek
+				stosu zastąpić ciągiem nieterminali z prawej strony wybranej produkcji. \label{punktB}
+				\item Następnie wczytywany jest kolejny znak i przechodzimy do punktu \ref{punktB}
+				\item Akceptujemy jeśli osiągnęliśmy konfigurację z pustym stosem i pustym wejściem, we
+				wszystkich pozostałych przypadkach odrzucamy.
+			\end{enumerate}
+	\end{enumerate}		
+	\end{proof}
+\end{tw}
+
+\begin{tw}[O równoważności akceptowania]~\\
+	Klasa automatów ze stosem akceptujących stanem końcowym jest równoważna klasie automatów ze stosem
+	akceptujących pustym stosem (i wejściem)
+	\begin{proof}
+		\begin{enumerate}
+			\item Możemy za symulować automat akceptujący stanem ($M_1$) automatem akceptującym pustym stosem ($M_2$)
+			w ten sposób że w momencie gdy stos zostanie wymazany automat
+			symulujący automatycznie zmieni swój stan na akceptujący.
+			\item $M_2$ może za symulować $M_1$ w ten sposób, że w momencie przejścia do stany akceptującego
+			\footnote{dokładniej to jeśli posiada konfigurację identyczna z konfiguracją akceptującą $M_1$}
+			przechodzi do specjalnego stanu $\overline{q}$
+			\item W stanie $\overline{q}$ stos jest czyszczony i automat $M_2$ zaakceptuje słowo.
+		\end{enumerate}
+	\end{proof}
+\end{tw}
+
+\begin{df}[Automat skończony deterministyczny]~\\
+	Automatem skończonym deterministycznym nazywamy strukturę 
+	\begin{equation}
+		M = (Q, \Sigma, \delta, q_0, F)
+	\end{equation}
+	gdzie funkcja przejścia $\delta$ jest funkcją całkowitą, co oznacza że dla każdego 
+	stanu istnieje dokładnie jedno przejście przez każdy symbol alfabetu wejściowego
+\end{df}
+
+\begin{df}[Domknięcie funkcji przejścia automatu deterministycznego]~\\
+	Domknięciem funkcji przejścia automatu skończonego deterministycznego nazywamy
+	funkcję
+	\begin{equation}
+		\overline{\delta} : Q\times\Sigma^\star \rightarrow Q
+	\end{equation}
+	taką, że:
+	\begin{eqnarray}
+		(\forall q\in Q) &\overline{q}(q, \varepsilon)& = q \\
+		(\forall q\in Q)(\forall a\in\Sigma)(\forall w\in\Sigma^\star) 
+		&\overline{\delta}(q, wa)& = \delta(\overline{\delta}(q, w), a)
+	\end{eqnarray}
+	$\overline{\delta}$ określa zachowanie automatu dla słowa nad alfabetem $\Sigma$
+\end{df}
+
+\begin{df}[Automat skończony niedeterministyczny]~\\
+	Automatem skończonym niedeterministycznym nazywamy system 
+	$M = (Q, \Sigma, \delta, q_0, F)$ gdzie funkcja przejścia jest postaci 
+	\begin{equation}
+		\delta : Q\times\Sigma \rightarrow 2^Q
+	\end{equation}
+	oraz jest również funkcją całkowitą. Wartościami funkcji przejścia są nie pojedyncze stany,
+	a podzbiory zbioru stanów $Q$
+\end{df}
+
+\begin{df}[Domknięcie funkcji przejścia automatu skończonego niedeterministycznego]~\\
+	Domknięcie funkcji przejścia automatu skończonego niedeterministycznego jest funkcja
+	\begin{equation}
+		\overline{\delta} : Q\times\Sigma^\star \rightarrow 2^Q
+	\end{equation}
+	taka że
+	\begin{eqnarray}
+		(\forall q\in Q) &\overline{\delta}(q, \varepsilon)& = \{q\} \\
+		(\forall q\in Q)(\forall a\in\Sigma)(\forall w\in\Sigma^\star) &\overline{\delta}(q, wa)& = \bigcup_{r\in\overline{\delta}(q,w)}\delta(r, a)
+	\end{eqnarray}
+	$\overline{\delta}$ określa zachowanie automatu dla słowa nad alfabetem $\Sigma$. Zastosowanie go do konfiguracji
+	początkowej określa zbiór możliwych stanów, do których może przejść automat po wczytaniu słowa wejściowego.
+\end{df}
+
+\begin{df}[Domknięcie stanu automatu]~\\
+	$\varepsilon$-domknięciem stanu $q$ (ozn. $\varepsilon-CL(q)$) nazywamy zbiór stanów
+	\begin{equation}
+		\varepsilon-CL(q) = \{p : p \in \delta(q, \varepsilon)\}
+	\end{equation}
+\end{df}
+
+\begin{tw}
+	Klasa automatów skończonych deterministycznych jest równoważna klasie automatów skończonych niedeterministycznych.
+	\begin{proof}
+		Wykażemy że dla każdego automatu jednej klasy umiemy skonstruować równoważny automat drugiej klasy.
+		\begin{enumerate}
+			\item Każdy automat deterministyczny jest szczególnym przypadkiem automatu niedeterministycznego. Pojedyncze
+			stany należałoby jedynie zastąpić jednoelementowymi zbiorami stanów.
+			\item Aby wykazać że automat skończony niedeterministyczny da się symulować automatem deterministycznym oznaczamy
+			pierwszy jako $M$ a automat symulujący jako $M'$
+			\begin{itemize}
+				\item Stanem odpowiadającym zbiorowi stanów $\{q_{i1}, q_{i2}, \dots, q_{in}\}$ będzie $[q_{i1}, q_{i2}, \dots, q_{in}]$
+				czyli stan etykietowany nazwami stanów ze zbioru w automacie niedeterministycznym.
+				\item Funkcję przejścia automatu deterministycznego definiujemy jako sumę wartości funkcji dla stanów którymi etykietowany
+				jest dany stan
+				\begin{eqnarray}
+					\delta'([q_0], x) = [q_{i1}, q_{i2}, \dots, q_{ij}] &\Leftrightarrow& \delta(q_0, x) = \{q_{i1}, q_{i2}, \dots, q_{ij}\} \\
+					\delta'([q_{ij}, \dots, g_{ij}], a) = [q_{i1}, q_{ik}, \dots, q_{ij}] &\Leftrightarrow& \bigcup_{l=1}^{j} \delta(q_{il}, x) = \{p_{i1}, p_{i2}, \dots, p_{ik}\}
+				\end{eqnarray}
+			\end{itemize}
+		\end{enumerate}
+	\end{proof}
+\end{tw}
+
+\begin{tw}
+	Klasa automatów skończonych jest równoważna klasie gramatyk regularnych i jest równoważna klasie wyrażeń regularnych.
+\end{tw}
+
