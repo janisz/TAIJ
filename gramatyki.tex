@@ -68,16 +68,16 @@
 			$$
 	\end{df}
 	
-	\begin{df}[Język bez kontekstowy]~\\
-		Językami bez kontekstowymi będziemy nazywać języki generowane przez gramatyki bezkontekstowe i tylko takie języki		
+	\begin{df}[Język bezkontekstowy]~\\
+		Językami bezkontekstowymi będziemy nazywać języki generowane przez gramatyki bezkontekstowe i tylko takie języki		
 		
 		\begin{uwaga}
-			Językiem generowanym przez gramatykę bez kontekstową jest zbiór słów który da się wywieść z symbolu początkowego gramatyki stosując
+			Językiem generowanym przez gramatykę bezkontekstową jest zbiór słów który da się wywieść z symbolu początkowego gramatyki stosując
 			jej produkcje
 		\end{uwaga}
 	\end{df}
 	
-	\begin{df}[Drzewo wywodu w gramatyce bez kontekstowej]~\\
+	\begin{df}[Drzewo wywodu w gramatyce bezkontekstowej]~\\
 		Jest to drzewo o następujących własnościach
 		\begin{itemize}
 			\item Wierzchołki etykietowane symbolami terminalnymi, nieterminalnymi lub $\varepsilon$
@@ -91,7 +91,7 @@
 
 	
 	\begin{przyklad}
-		Wykazać że język palindromów jest generowany przez gramatykę bez kontekstową.
+		Wykazać że język palindromów jest generowany przez gramatykę bezkontekstową.
 	\begin{proof}
 		$w$ - palindrom nad $\{0,1\}$ \\
 		\begin{enumerate}
@@ -103,10 +103,10 @@
 	\end{przyklad}		
 	
 	\begin{tw}
-	Klasa języków regularnych zawiera się w klasie języków bez kontekstowych
+	Klasa języków regularnych zawiera się w klasie języków bezkontekstowych
 	\end{tw}
 	
-	\subsubsection{Metody upraszczania gramatyk bez kontekstowych}
+	\subsubsection{Metody upraszczania gramatyk bezkontekstowych}
 	
 	\begin{df}[Symbole bezużyteczne]~\\
 		\begin{description}
@@ -116,12 +116,12 @@
 	\end{df}	
 	
 	\begin{lemat}[Usuwanie symboli bezużytecznych 1]\footnote{Uzasadnienie lematu można przeprowadzić analizując drzewa wywodu gramatyk}~\\
-		Dla dowolnej gramatyki bez kontekstowej $G = (V, T, P, S)$ generującej niepusty język $L(G)$ istnieje równoważna gramatyka
+		Dla dowolnej gramatyki bezkontekstowej $G = (V, T, P, S)$ generującej niepusty język $L(G)$ istnieje równoważna gramatyka
 		bezkontekstowa $G' = (V', T', P', S')$ tak że z każdego symbolu nieterminalnego z $V'$ można wyprowadzić ciąg symboli terminalnych (być może pusty)
 	\end{lemat}	
 	
 	\begin{lemat}[Usuwanie symboli bezużytecznych 2]\footnote{Uzasadnienie lematu można przeprowadzić analizując drzewa wywodu gramatyk}~\\
-		Dla dowolnej gramatyki bez kontekstowej $G = (V, T, P, S)$ generującej niepusty język $L(G)$ istnieje równoważna gramatyka
+		Dla dowolnej gramatyki bezkontekstowej $G = (V, T, P, S)$ generującej niepusty język $L(G)$ istnieje równoważna gramatyka
 		bezkontekstowa $G' = (V', T', P', S')$ tak że każdy symbol terminalny i nieterminalny z $T' \cup V'$ można wyprowadzić
 		z  symbolu startowego $S$
 	\end{lemat}		
@@ -171,7 +171,7 @@
 	\end{alg}
 	
 	\begin{df}[Usuwanie symboli bezużytecznych i wycieralnych]~\\
-		Jeśli $G = (V, T, P, S)$ jest gramatyką bez kontekstową i bez symboli bezużytecznych i nie generuje słowa pustego
+		Jeśli $G = (V, T, P, S)$ jest gramatyką bezkontekstową i bez symboli bezużytecznych i nie generuje słowa pustego
 		to można znaleźć równoważną jej gramatykę bez symboli bezużytecznych i wycieralnych.\\
 		\emph{Metoda przekształcania}\\
 		Załóżmy że $A \to X_1,X_2,\dots,X_n$ jeśli któryś z symboli $X_i$ jest wycieralny to tę produkcję zastępujemy produkcjami
@@ -182,7 +182,7 @@
 	\end{df}	
 	
 	\begin{lemat}[Produkcje jednostkowe]~\\
-		Niech $G$ będzie gramatyką bez kontekstową bez symboli bezużytecznych oraz wycieralnych. Wówczas 
+		Niech $G$ będzie gramatyką bezkontekstową bez symboli bezużytecznych oraz wycieralnych. Wówczas 
 		istnieje równoważna jej gramatyka $G'$ również bez produkcji jednostkowych
 	\end{lemat}
 	
@@ -193,10 +193,10 @@
 		\end{enumerate}
 	\end{alg}
 	
-\subsection{Postaci gramatyk bez kontekstowych}
+\subsection{Postaci gramatyk bezkontekstowych}
 
 	\begin{tw}
-		Jeśli $L$ jest językiem bez kontekstowym, to język $L' = L - \varepsilon$ też jest językiem bez kontekstowym
+		Jeśli $L$ jest językiem bezkontekstowym, to język $L' = L - \varepsilon$ też jest językiem bezkontekstowym
 	\end{tw}
 	
 	\begin{df}[\href{http://pl.wikipedia.org/wiki/Posta\%C4\%87_normalna_Chomsky\%27ego}{Postać normalna Chomskiego}]~\\
@@ -209,7 +209,7 @@
 	\end{df}
 	
 	\begin{lemat}
-		Każdą gramatykę bez kontekstową, która nie generuje słowa pustego można przekształcić do postaci Chomskiego
+		Każdą gramatykę bezkontekstową, która nie generuje słowa pustego można przekształcić do postaci Chomskiego
 	\end{lemat}
 	
 	\begin{alg}[Przekształcanie do postaci Chomskiego]~\\
@@ -229,7 +229,7 @@
 	\end{alg}
 	
 	\begin{uwaga}
-		Drzewo wywodu słowa w gramatyce bez kontekstowej w postaci Chomskiego jest drzewem binarnym
+		Drzewo wywodu słowa w gramatyce bezkontekstowej w postaci Chomskiego jest drzewem binarnym
 	\end{uwaga}
 	
 	\begin{df}[\href{http://pl.wikipedia.org/wiki/Posta\%C4\%87_normalna_Greibach}{Postać normalna Greibach}]~\\
@@ -241,7 +241,7 @@
 	\end{df}
 	
 	\begin{lemat}
-		Każdą gramatykę bez kontekstową nie generującą słowa pustego da się sprowadzić do postaci Greibach
+		Każdą gramatykę bezkontekstową nie generującą słowa pustego da się sprowadzić do postaci Greibach
 	\end{lemat}
 	
 	\begin{alg}[Przekształcanie do postaci Greibach]~\\
@@ -278,7 +278,7 @@
 		\end{enumerate}
 	\end{alg}
 	
-\subsubsection{Sprawdzanie czy język jest bez kontekstowy}
+\subsubsection{Sprawdzanie czy język jest bezkontekstowy}
 
 	\begin{df}[Niejednoznaczność gramatyki]~\\
 		Gramatykę nazywamy niejednoznaczną $\Leftrightarrow$ istnieje takie słowo dla którego istnieje więcej niż jedno drzewo wywodu		
@@ -288,8 +288,8 @@
 		Plonem drzewa nazywamy wszystkie słowa które można wyprowadzić z danego drzewa
 	\end{df}	
 	
-	\begin{lemat}[\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j\%C4\%99zyk\%C3\%B3w_bezkontekstowych}{O pompowaniu (dla języków bez kontekstowych)}]~\\
-		Jeśli $L$ jest językiem bez kontekstowym, to istnieje stała $n_L$ taka że dla
+	\begin{lemat}[\href{http://pl.wikipedia.org/wiki/Lemat_o_pompowaniu_dla_j\%C4\%99zyk\%C3\%B3w_bezkontekstowych}{O pompowaniu (dla języków bezkontekstowych)}]~\\
+		Jeśli $L$ jest językiem bezkontekstowym, to istnieje stała $n_L$ taka że dla
 		dowolnego słowa $z\in L$ spełniony jest warunek:
 		\begin{equation}
 			(|z| \geqslant n_L) \Rightarrow [( \exists_{u,v,w,x,y} z = uvwxy \wedge |vwx| \leqslant n_L \wedge |vx| \geqslant 1) \forall_{i=0,1,\dots} z_i = uv^iwx^iy \in L]
@@ -303,7 +303,7 @@
 				\item Jeżeli $L$ jest skończony, to lemat jest sprawdzimy (wystarczy przyjąć $n_L$ wiesze niż długość najdłuższego słowa)
 				\item Język jest nieskończony
 					\begin{enumerate}
-						\item Skoro język jest bez kontekstowy to weźmy gramatykę $G$ w postaci Chomskiego generującą ten język. Wtedy 
+						\item Skoro język jest bezkontekstowy to weźmy gramatykę $G$ w postaci Chomskiego generującą ten język. Wtedy 
 						drzewo wywodu słów z $L$ będą drzewami binarnymi. Drzewo wywodu mające $k$ liści ma zatem $log_2k$ poziomów
 						(wysokość $h = log_2k$). Zatem liczba krawędzi między ścieżkami z korzenia do liścia jest nie mniejsza niż $h$.
 						Wierzchołki ścieżki oprócz ostatniego etykietujemy symbolami nieterminalnymi a ostatni symbolem terminalnym.
@@ -331,11 +331,11 @@
 		\begin{equation}
 			(|z| \geqslant n_L) \Rightarrow [( \forall_{u,v,w,x,y} z = uvwxy \wedge |vwx| \leqslant n_L \wedge |vx| \geqslant 1) \exists_{i=0,1,\dots} z_i = uv^iwx^iy \not\in L]
 		\end{equation}
-		to język $L$ nie jest językiem bez kontekstowym
+		to język $L$ nie jest językiem bezkontekstowym
 	\end{lemat}			
 		
 	\begin{lemat}[\href{http://pl.wikipedia.org/wiki/Lemat_Ogdena}{Ogdena}]~\\
-		Jeśli $L$ jest językiem bez kontekstowym, to istnieje stała $n_L$ taka, że dla dowolnego słowa z języka $L$, w którym wyróżniono przynajmniej
+		Jeśli $L$ jest językiem bezkontekstowym, to istnieje stała $n_L$ taka, że dla dowolnego słowa z języka $L$, w którym wyróżniono przynajmniej
 		$n_L$ symboli spełniony jest warunek:\\
 		Istnieje taki podział słowa $z$ na pięć części $z = uvwxy$ takich że:
 		\begin{enumerate}
@@ -365,7 +365,7 @@
 		\begin{equation}
 			(\exists i=1,2,\dots) \quad uv^iwx^iy \in L
 		\end{equation}
-		to język $L$ nie jest językiem bez kontekstowym
+		to język $L$ nie jest językiem bezkontekstowym
 	\end{lemat}	
 
 \subsection{Gramatyki kontekstowe}
@@ -384,7 +384,7 @@
 	\end{df}	
 	
 	\begin{tw}
-		Klasa języków bez kontekstowych bez słowa pustego zawiera się w klasie języków kontekstowych
+		Klasa języków bezkontekstowych bez słowa pustego zawiera się w klasie języków kontekstowych
 	\end{tw}
 
 	\begin{df}[Postać normalna gramatyki kontekstowej]~\\
